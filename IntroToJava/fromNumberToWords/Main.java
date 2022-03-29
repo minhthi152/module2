@@ -13,7 +13,7 @@ public class Main {
         String words = "";
         String words2 = "";
 
-        words = getWords(num1, words) + "hundred and ";
+//        words = getWords(num1, words) + "hundred and ";
         switch(num2){
             case 0:
                 words2 = "";
@@ -78,18 +78,34 @@ public class Main {
                 words2 = "Ninety ";
                 break;
         }
-        if(num2 == 1){
-            words =  words + words2;
+
+        if(num123 >= 0 && num123 <=9){
+            System.out.println(getWords(num3,words));
+        }else if(num123 == 10){
+            System.out.println("Ten");
+
+        }else if(num123 > 10 && num123 <=19){
+            System.out.println(words2);
+
+        }else if(num123 >=20 && num123 <= 99){
+            words = words2 + getWords(num3, words);
             System.out.println(words);
-        }else{
-        words =  words + words2 + getWords(num3, words);
-        System.out.println(words);
+        }else if(num123 >=100 && num2 == 1){
+            words = getWords(num1, words) + "Hundred And " + words2;
+            System.out.println(words);
+        }
+        else{
+            words =  getWords(num1, words) + "Hundred And " + words2 + getWords(num3, words);
+            System.out.println(words);
         }
 
     }
 
     private static String getWords(int num, String words) {
         switch (num) {
+            case 0:
+                words = "Zero ";
+                break;
             case 1:
                 words = "One ";
                 break;
