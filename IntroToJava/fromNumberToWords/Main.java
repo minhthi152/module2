@@ -78,8 +78,10 @@ public class Main {
                 words2 = "Ninety ";
                 break;
         }
-
-        if(num123 >= 0 && num123 <=9){
+        if(num123 < 0 || num123 >=1000){
+            System.out.println("Out of number");
+        }
+        else if(num123 >= 0 && num123 <=9){
             System.out.println(getWords(num3,words));
         }else if(num123 == 10){
             System.out.println("Ten");

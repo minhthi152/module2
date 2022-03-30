@@ -8,7 +8,7 @@ public class Main {
         System.out.print("Enter amount of money USD: ");
         usd = myScanner.nextDouble();
         result = usd * 23000;
-        System.out.print("Equal to " + result + " VND");
+        System.out.print("Equal to " + result + "VND");
 
     }
 }
