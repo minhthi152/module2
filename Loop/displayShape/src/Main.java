@@ -27,6 +27,7 @@ public class Main {
                         }
                         System.out.println();
                     }
+                    break;
                 case 2:
                     System.out.println("1. Print the square triangle");
                     int sideLength;
@@ -39,6 +40,7 @@ public class Main {
                        System.out.println();
 
                    }
+                   break;
                 case 3:
                     System.out.println("1. Print the isosceles triangle");
                     int high, k = 0;
@@ -56,6 +58,12 @@ public class Main {
 
 
                     }
+                    break;
+                case 4:
+                    System.exit(0);
+                default:
+                    System.out.println("No choice!");
+
 
             }
 
