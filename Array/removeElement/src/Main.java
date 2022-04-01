@@ -36,7 +36,7 @@ public class Main {
 
     private static int[] remove(int[] array, int number){
         int index = 0;
-        int[] newArr = new int[array.length-1];
+        int[] newArray = new int[array.length-1];
         for( int i = 0; i < array.length; i++){
             if(number == array[i]){
                 index = i;
@@ -47,9 +47,9 @@ public class Main {
             if(i == index) {
                 continue;
             }
-            newArr[j] = array[i];
+            newArray[j] = array[i];
             j++;
         }
-        return newArr;
+        return newArray;
     }
 }
