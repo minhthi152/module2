@@ -12,9 +12,9 @@ public class Fan {
     public void setSpeed(int speed){
         this.speed = speed;
     }
-    public void setOn(boolean on){
-        this.on = on;
-    }
+//    public void setOn(boolean on){
+//        this.on = on;
+//    }
     public void setRadius(double radius){
         this.radius = radius;
     }
