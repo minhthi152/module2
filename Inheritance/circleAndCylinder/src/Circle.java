@@ -1,9 +1,9 @@
 public class Circle {
     public double radius;
     public String color;
-    public Circle(){
-
-    }
+//    public Circle(){
+//
+//    }
 
     public Circle(double radius, String color) {
         this.radius = radius;
