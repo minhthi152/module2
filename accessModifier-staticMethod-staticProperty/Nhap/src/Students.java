@@ -1,7 +1,5 @@
 public class Students {
 //    static int number;
-
-
     public static String className = "C0222H1";
     public static int id = 1;
     public String name;
@@ -12,16 +10,13 @@ public class Students {
         studentId = id++;
         this.name = name;
         this.age = age;
-
     }
-
     public void display(){
         System.out.println(className + "-" + studentId + ": " + name + " - " + age + " tuoi");
     }
 //    public static void showInfo(){
 //        System.out.println(className + name);
 //    }
-
     public static void main(String[] args) {
         Students s1 = new Students("Thi", 15);
         Students s2 = new Students("Hang", 12);
@@ -29,8 +24,6 @@ public class Students {
         s1.display();
         s2.display();
         s3.display();
-
-
     }
     static {
         System.out.println("Static go first");

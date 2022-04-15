@@ -1,6 +1,6 @@
 package fruit;
 
-public class Apple extends Fruit{
+public class Apple extends Fruit {
     public String name;
 
     public Apple(String name) {

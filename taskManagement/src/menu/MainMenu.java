@@ -1,5 +1,4 @@
 package menu;
-
 import java.util.Scanner;
 public class MainMenu {
     public static void showMainMenu(){
@@ -127,7 +126,7 @@ public class MainMenu {
         System.out.println("* 1. Delete a task          *");
         System.out.println("* 2. Delete all tasks       *");
         System.out.println("* 10. Back to home page     *");
-        System.out.println("----------------------------");
+        System.out.println("-----------------------------");
         int choice = -1;
 
         while (choice != 0){
@@ -159,11 +158,11 @@ public class MainMenu {
 
     }
     public static void showEditMenu(){
-        System.out.println("------------Edit----------");
+        System.out.println("------------Edit-----------");
         System.out.println("* 1. Edit 1               *");
         System.out.println("* 2. Edit 2               *");
-        System.out.println("* 10. Back to home page     *");
-        System.out.println("----------------------------");
+        System.out.println("* 10. Back to home page   *");
+        System.out.println("---------------------------");
         int choice = -1;
 
         while (choice != 0){

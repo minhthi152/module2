@@ -5,4 +5,5 @@ public class Test {
         s1.setClasses("C0222H1");
         System.out.println(s1.toString());
     }
+
 }
