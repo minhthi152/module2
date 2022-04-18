@@ -10,7 +10,7 @@ public class MyListTest {
         System.out.println("element 0: " + listInteger.get(0));
         System.out.println("element 4: " + listInteger.get(4));
 
-   
+
         System.out.println("Element -1: " + listInteger.get(-1));
     }
 }
