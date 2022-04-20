@@ -6,6 +6,9 @@ public class TestMyLinkedList {
         ll.add(5, 6);
         ll.add(3,10);
         ll.add(2,11);
+        ll.printList();
+        System.out.println("-----");
+        ll.add(0,10);
 //        ll.addFirst(2);
 //        ll.addFirst(3);
 //        ll.addFirst(8);

@@ -25,14 +25,14 @@ public class MyLinkedList<E> {
         }
     }
 
-//Them phan tu vao dau
+//Add element at fist position
     public void addFirst(int value){
         Node temp = head;
         head = new Node(value);
         head.next =temp;
         size++;
     }
-//    Them phan tu vao sau
+//    add element at last
     public void addLast(int value){
         Node temp = head;
         while (temp.next !=null){
@@ -41,20 +41,20 @@ public class MyLinkedList<E> {
         temp.next = new Node(value);
         size++;
     }
-//    Them phan tu vao vi tri bat ky
+//   Add element at a specified index position
     public void add(int value, int index){
         if(index==0){
             addFirst(value);
         }else{
-//            tao node de add
+//           create a node to add
             Node newNode = new Node(value);
-//            tim vi tri can add
+//            find position to add
             Node curNode = head;
             int count = 0;
             while (curNode.next!= null){
                 count ++;
                 if(count == index){
-//                    thuc hien add vao
+//                    add
                     newNode.next = curNode.next;
                     curNode.next = newNode;
                         break;
@@ -65,8 +65,14 @@ public class MyLinkedList<E> {
         size++;
 
     }
+//remove first
+    public void removeFirst(){
 
-//    Remove phan tu tai vi tri xac dinh
-    
+    }
+
+//    Remove element at a specified index position
+
+
+
 
 }
