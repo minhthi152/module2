@@ -8,6 +8,8 @@ public class IntegersStack {
 
     public static void main(String[] args) {
         Stack<Integer> integerStack = new Stack<>();
+        Stack<Integer> newItegerStack = new Stack<>();
+
         Scanner input = new Scanner(System.in);
         System.out.println("Enter numbers: ");
         int num;
@@ -16,11 +18,14 @@ public class IntegersStack {
             num = input.nextInt();
             integerStack.push(num);
             size++;
-        }while (num!=0);
-
-        for(int i = 0; i<size; i++){
-            System.out.print(integerStack.pop() + "  ");
+        }while (size!=6);
+        System.out.println(integerStack);
+        for(int i = 0; i< size; i++){
+//            System.out.print(integerStack.pop() + "  ");
+           newItegerStack.push( integerStack.pop());
         }
+
+        System.out.println(newItegerStack);
     }
 
 
