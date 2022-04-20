@@ -1,0 +1,96 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ChangeListManager">
+    <list default="true" id="37e0a989-fe90-4d87-95ae-29d80fa36404" name="Changes" comment="">
+      <change beforePath="$PROJECT_DIR$/../product2" beforeDir="false" afterPath="$PROJECT_DIR$/../product2" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/.gitignore" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/modules.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/vcs.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/BinaryNumber.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/RevertString.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Stack/LinkedList/MyGenericStack.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Stack/LinkedList/StackClient.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/stack/stack/.idea/.gitignore" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/stack/stack/.idea/misc.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/stack/stack/.idea/modules.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/stack/stack/.idea/vcs.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/stack/stack/BinaryNumber.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/stack/stack/RevertString.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/stack/stack/Stack/LinkedList/MyGenericStack.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/stack/stack/Stack/LinkedList/StackClient.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/stack/stack/stack.iml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/stack.iml" beforeDir="false" />
+    </list>
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="Class" />
+      </list>
+    </option>
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/.." />
+  </component>
+  <component name="MarkdownSettingsMigration">
+    <option name="stateVersion" value="1" />
+  </component>
+  <component name="ProjectId" id="283FLiNegXv0p1Uafh4aLEESacX" />
+  <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent">
+    <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
+    <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/../stackAndQueue" />
+  </component>
+  <component name="RunManager">
+    <configuration name="StackClient" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="stack.Stack.LinkedList.StackClient" />
+      <module name="stack" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="stack.Stack.LinkedList.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <recent_temporary>
+      <list>
+        <item itemvalue="Application.StackClient" />
+      </list>
+    </recent_temporary>
+  </component>
+  <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="37e0a989-fe90-4d87-95ae-29d80fa36404" name="Changes" comment="" />
+      <created>1650437308085</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1650437308085</updated>
+    </task>
+    <servers />
+  </component>
+  <component name="Vcs.Log.Tabs.Properties">
+    <option name="TAB_STATES">
+      <map>
+        <entry key="MAIN">
+          <value>
+            <State />
+          </value>
+        </entry>
+      </map>
+    </option>
+  </component>
+</project>
