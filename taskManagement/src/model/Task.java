@@ -5,8 +5,8 @@ import java.util.Date;
 public class Task {
     private int id;
     private String taskName;
-    private String createDate;
-    private String deadline;
+    private Date createDate;
+    private Date deadline;
     private User createdBy;
     private User updatedBy;
     private boolean status;
@@ -15,9 +15,12 @@ public class Task {
     public Task() {
     }
 
-    public Task(String taskName, String deadline) {
+    public Task(int id, String taskName, Date createDate,Date deadline) {
+        this.id = id;
         this.taskName = taskName;
+        this.createDate = createDate;
         this.deadline = deadline;
+
     }
 
     public String getTaskName() {
@@ -28,25 +31,55 @@ public class Task {
         this.taskName = taskName;
     }
 
-    public String getDeadline() {
+    public Date getDeadline() {
         return deadline;
     }
 
-    public void setDeadline(String deadline) {
+    public void setDeadline(Date deadline) {
         this.deadline = deadline;
     }
 
-    @Override
-    public String toString() {
-        return "Task{" +
-                "id=" + id +
-                ", taskName='" + taskName + '\'' +
-                ", createDate='" + createDate + '\'' +
-                ", deadline='" + deadline + '\'' +
-                ", createdBy=" + createdBy +
-                ", updatedBy=" + updatedBy +
-                ", status=" + status +
-                ", description='" + description + '\'' +
-                '}';
+    public int getId() {
+        return id;
+    }
+
+    public Date getCreateDate() {
+        return createDate;
+    }
+
+    public void setCreateDate(Date createDate) {
+        this.createDate = createDate;
+    }
+
+    public User getCreatedBy() {
+        return createdBy;
+    }
+
+    public void setCreatedBy(User createdBy) {
+        this.createdBy = createdBy;
+    }
+
+    public User getUpdatedBy() {
+        return updatedBy;
+    }
+
+    public void setUpdatedBy(User updatedBy) {
+        this.updatedBy = updatedBy;
+    }
+
+    public boolean isStatus() {
+        return status;
+    }
+
+    public void setStatus(boolean status) {
+        this.status = status;
+    }
+
+    public String getDescription() {
+        return description;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
     }
 }

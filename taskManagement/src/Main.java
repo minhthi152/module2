@@ -1,8 +1,9 @@
-import menu.MainMenu;
+import views.Menu;
 
 public class Main {
     public static void main(String[] args) {
-        MainMenu.showMainMenu();
+        Menu.showMainMenu();
+
 
     }
 }

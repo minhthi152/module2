@@ -1,2 +1,5 @@
-package model;public enum Role {
+package model;
+
+public enum Role{
+
 }
