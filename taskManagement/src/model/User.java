@@ -5,19 +5,32 @@ public class User {
     private String fullName;
     private String email;
     private String phoneNumber;
+    private String userName;
     private String password;
-    private String position;
+    private Role role;
 
     public User() {
     }
 
-    public User(int id, String fullName, String email, String phoneNumber, String password, String position) {
+    public User(int id, String fullName, String email, String phoneNumber, String userName, String password, Role role) {
         this.id = id;
         this.fullName = fullName;
         this.email = email;
         this.phoneNumber = phoneNumber;
+        this.userName = userName;
         this.password = password;
-        this.position = position;
+        this.role = role;
+    }
+
+    public User(String line){
+        String[] userInfo = line.split(",");
+        this.id = Integer.parseInt(userInfo[0]);
+        this.fullName = userInfo[1];
+        this.email = userInfo[2];
+        this.phoneNumber = userInfo[3];
+        this.userName = userInfo[4];
+        this.password = userInfo[5];
+        this.role = Role.fromValue(userInfo[6]);
     }
 
     public int getId() {
@@ -52,6 +65,14 @@ public class User {
         this.phoneNumber = phoneNumber;
     }
 
+    public String getUserName() {
+        return userName;
+    }
+
+    public void setUserName(String userName) {
+        this.userName = userName;
+    }
+
     public String getPassword() {
         return password;
     }
@@ -60,22 +81,22 @@ public class User {
         this.password = password;
     }
 
-    public String getPosition() {
-        return position;
+    public Role getRole() {
+        return role;
     }
 
-    public void setPosition(String position) {
-        this.position = position;
+    public void setRole(Role role) {
+        this.role = role;
     }
 
     @Override
     public String toString() {
-        return "User{" +
-                "fullName='" + fullName + '\'' +
-                ", email='" + email + '\'' +
-                ", phoneNumber='" + phoneNumber + '\'' +
-                ", password='" + password + '\'' +
-                ", position='" + position + '\'' +
-                '}';
+        return id +
+                "," + fullName +
+                "," + email +
+                "," + phoneNumber +
+                "," + userName +
+                "," + password +
+                "," + role;
     }
 }

@@ -1,25 +1,49 @@
 package views;
 
 
+import notification.Exit;
 import notification.WrongChoice;
 
 import java.util.Scanner;
 
 
 public class Menu {
+    static   Scanner input = new Scanner(System.in);
+
+public static void homeMenu(){
+    System.out.println("-----------*****------------");
+    System.out.println("|        1. Sign in        |");
+    System.out.println("|        2. Sign up        |");
+    System.out.println("|        0. Exit           |");
+    System.out.println("|__________________________|");
+    System.out.println("Tell me your choice: ");
+    int choice = -1;
+    while(choice!=0){
+       choice = Integer.parseInt(input.nextLine());
+       switch (choice){
+           case 1: SignIn.signIn();
+           break;
+           case 2: SignUp.signUp();
+           break;
+           case 0:
+               Exit.exitProgram();
+       }
+    }
+}
     public static void showMainMenu(){
         System.out.println("------------Menu------------");
         System.out.println("| 1. Add a new task        |");
         System.out.println("| 2. Show tasks            |");
         System.out.println("| 3. Delete task           |");
         System.out.println("| 4. Edit a task           |");
+        System.out.println("| 5. Sort tasks            |");
+        System.out.println("| 6. Search tasks          |");
         System.out.println("| 0. Exit                  |");
         System.out.println("|__________________________|");
         System.out.println("Enter your choice: ");
         int choice = -1;
 
         while (choice != 0){
-            Scanner input = new Scanner(System.in);
             try{
                 choice = Integer.parseInt(input.nextLine());
                 switch (choice){
@@ -35,9 +59,13 @@ public class Menu {
                     case 4:
                         showEditMenu();
                         break;
+//                    case 5:
+//                        showMenuSort();
+//                        break;
+                    case 6:
+                        TaskList.searchTaskByName();
                     case 0:
-                        System.out.println("-----Have a good day!-----");
-                        System.exit(0);
+                        Exit.exitProgram();
                         break;
                     default:
                         WrongChoice.chooseWrong();
@@ -53,7 +81,7 @@ public class Menu {
         }
 
     }
-  static   Scanner input = new Scanner(System.in);
+
     public static void showAddMenu(){
         int choice = -1;
 
@@ -149,7 +177,7 @@ public class Menu {
                 choice = Integer.parseInt(input.nextLine());
                 switch (choice){
                     case 1:
-                        System.out.println("Delete a task");
+                        TaskList.deleteTask();
                         break;
                     case 2:
                         System.out.println("Delete all tasks");
@@ -173,8 +201,7 @@ public class Menu {
     }
     public static void showEditMenu(){
         System.out.println("------------Edit-----------");
-        System.out.println("| 1. Edit 1               |");
-        System.out.println("| 2. Edit 2               |");
+        System.out.println("| 1. Edit a task          |");
         System.out.println("| 10. Back to home page   |");
         System.out.println("---------------------------");
         int choice = -1;
@@ -185,10 +212,7 @@ public class Menu {
                 choice = Integer.parseInt(input.nextLine());
                 switch (choice){
                     case 1:
-                        System.out.println("Edit 1");
-                        break;
-                    case 2:
-                        System.out.println("Edit 2");
+                        TaskList.editProduct();
                         break;
                     case 10:
                         showMainMenu();

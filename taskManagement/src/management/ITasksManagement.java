@@ -15,5 +15,5 @@ public interface ITasksManagement {
 
     void update(Task task);
 
-    void removeById(long taskId);
+    void remove(Task task);
 }
