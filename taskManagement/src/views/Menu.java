@@ -19,14 +19,19 @@ public static void homeMenu(){
     System.out.println("Tell me your choice: ");
     int choice = -1;
     while(choice!=0){
-       choice = Integer.parseInt(input.nextLine());
-       switch (choice){
-           case 1: SignIn.signIn();
-           break;
-           case 2: SignUp.signUp();
-           break;
-           case 0:
-               Exit.exitProgram();
+       try {
+           choice = Integer.parseInt(input.nextLine());
+           switch (choice){
+               case 1: SignIn.signIn();
+                   break;
+               case 2: SignUp.signUp();
+                   break;
+               case 0:
+                   Exit.exitProgram();
+           }
+       }catch (Exception e){
+           System.out.println("Please choose provided number!");
+           homeMenu();
        }
     }
 }

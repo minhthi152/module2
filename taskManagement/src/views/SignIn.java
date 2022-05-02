@@ -1,13 +1,15 @@
 package views;
 
 import management.IUsersManagement;
+import management.UsersManagement;
 
 import java.util.Scanner;
 
 import static notification.Exit.exitProgram;
+import static notification.WrongChoice.chooseWrong;
 
 public class SignIn {
-public static IUsersManagement userSignIn;
+public static IUsersManagement userSignIn = new UsersManagement();
 static Scanner input = new Scanner(System.in);
     public static void signIn() {
         System.out.println("________________ SIGN IN _________________");
@@ -21,12 +23,13 @@ static Scanner input = new Scanner(System.in);
         } else {
             System.out.println("Sign in successfully! \n");
             System.out.println("Welcome to i-Tasks!");
+            Menu.showMainMenu();
         }
     }
 
     public static void tryAgain() {
-        System.out.println("   1.Enter y to try again");
-        System.out.println("   2.Enter n to exit");
+        System.out.println("   1. Enter y to try again");
+        System.out.println("   2. Enter n to exit");
         String choice = input.nextLine();
         switch (choice) {
             case "y":
@@ -36,9 +39,9 @@ static Scanner input = new Scanner(System.in);
                 exitProgram();
                 break;
             default:
-                System.out.println("   Please choose a provided number: ");
-                System.out.println("   1.Enter y to try again");
-                System.out.println("   2.Enter n to exit");
+                chooseWrong();
+                System.out.println("   1. Enter y to try again");
+                System.out.println("   2. Enter n to exit");
                 tryAgain();
         }
     }

@@ -1,25 +1,31 @@
 package views;
 
 import management.IUsersManagement;
+import management.UsersManagement;
 import model.Role;
 import model.User;
 
+import notification.Exit;
 import utils.ValidateUtils;
 
 import java.util.Random;
 import java.util.Scanner;
 
+import static notification.Exit.exitProgram;
+
 public class SignUp {
-    public static IUsersManagement userSignUp;
+    public static IUsersManagement userSignUp = new UsersManagement();
     static Scanner input = new Scanner(System.in);
     public static void signUp() {
         try {
 // Create ramdom id
-            int id = 1;
+            int id;
             Random r = new Random();
             int low = 100;
             int high = 999;
-            int number = r.nextInt(high-low) + low;
+            do {
+                id = r.nextInt(high-low) + low;
+            } while (userSignUp.exist(id));
 
 //            enter full name
             System.out.println("Enter your full name (ex: Thi Pham): ");
@@ -56,6 +62,7 @@ public class SignUp {
                 System.out.println("This phone number has already existed, please try another number");
                 System.out.println("Enter your phone number (ex: 0987456123): ");
                 phoneNumber = input.nextLine();
+            }
 
 // enter user name
                 System.out.println("Enter your username: ");
@@ -71,21 +78,41 @@ public class SignUp {
                 while (!ValidateUtils.isPasswordValid(password)) {
                     System.out.println("Weak password, please try another password!");
                     password = input.nextLine();
+                }
 
 // Create user
-                    User user = new User(id,fullName, email, phoneNumber, userName, password, Role.LEADER);
+                    User user = new User(id, fullName, email, phoneNumber, userName, password, Role.LEADER);
                     setRole(user);
                     userSignUp.add(user);
                     System.out.println("Sign up successfully!");
-                }
 
-            }
-        } catch (Exception e) {
+
+            boolean check = true;
+            do {
+                System.out.println("Enter 'y' to sign in now, enter n to return and enter e to exit");
+                String choice = input.nextLine();
+                switch (choice) {
+                    case "y":
+                        Menu.showMainMenu();
+                        break;
+                    case "n":
+                        Menu.homeMenu();
+                        break;
+                    case "e":
+                        exitProgram();
+                    default:
+                        System.out.println("Please select the right option!");
+                        check = false;
+                }
+            } while (!check);
+
+            }catch (Exception e) {
             System.out.println("Invalid input, please try again!");
-            signUp();
+            e.printStackTrace();
+        }
         }
 
-    }
+
 
         public static void setRole(User user) {
                 System.out.println("Select a role: ");
