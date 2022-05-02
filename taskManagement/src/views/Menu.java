@@ -30,7 +30,7 @@ public static void homeMenu(){
                    Exit.exitProgram();
            }
        }catch (Exception e){
-           System.out.println("Please choose provided number!");
+           WrongChoice.chooseWrong();
            homeMenu();
        }
     }
@@ -43,6 +43,7 @@ public static void homeMenu(){
         System.out.println("| 4. Edit a task           |");
         System.out.println("| 5. Sort tasks            |");
         System.out.println("| 6. Search tasks          |");
+        System.out.println("| 7. Members management    |");
         System.out.println("| 0. Exit                  |");
         System.out.println("|__________________________|");
         System.out.println("Enter your choice: ");
@@ -69,6 +70,10 @@ public static void homeMenu(){
 //                        break;
                     case 6:
                         TaskList.searchTaskByName();
+                        break;
+                    case 7:
+                        menuMemberManagement();
+                        break;
                     case 0:
                         Exit.exitProgram();
                         break;
@@ -235,4 +240,35 @@ public static void homeMenu(){
 
         }
     }
+    public static void menuMemberManagement() {
+        System.out.println("-----------------------------------");
+        System.out.println("|                                  |");
+        System.out.println("| 1. Show members list             |");
+        System.out.println("| 2. Change information            |");
+        System.out.println("|                                  |");
+        System.out.println("------------------------------------");
+        System.out.println("Enter your choice: ");
+        int choice = -1;
+        while (choice != 0){
+            try {
+                choice = Integer.parseInt(input.nextLine());
+                switch (choice){
+                    case 1:
+                        UserView.showMembers();
+                        break;
+                    case 2:
+                        UserView.changeInfo();
+                        break;
+                    default:
+                        WrongChoice.chooseWrong();
+                        menuMemberManagement();
+                }
+            }catch (Exception e){
+                WrongChoice.chooseWrong();
+                menuMemberManagement();
+            }
+        }
+    }
+
+
 }

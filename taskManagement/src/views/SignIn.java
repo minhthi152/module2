@@ -6,6 +6,7 @@ import management.UsersManagement;
 import java.util.Scanner;
 
 import static notification.Exit.exitProgram;
+import static notification.TryAgainOrExit.tryAgainOrExit;
 import static notification.WrongChoice.chooseWrong;
 
 public class SignIn {
@@ -28,8 +29,7 @@ static Scanner input = new Scanner(System.in);
     }
 
     public static void tryAgain() {
-        System.out.println("   1. Enter y to try again");
-        System.out.println("   2. Enter n to exit");
+        tryAgainOrExit();
         String choice = input.nextLine();
         switch (choice) {
             case "y":
@@ -40,8 +40,7 @@ static Scanner input = new Scanner(System.in);
                 break;
             default:
                 chooseWrong();
-                System.out.println("   1. Enter y to try again");
-                System.out.println("   2. Enter n to exit");
+                tryAgainOrExit();
                 tryAgain();
         }
     }

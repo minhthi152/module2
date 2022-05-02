@@ -4,8 +4,6 @@ import management.IUsersManagement;
 import management.UsersManagement;
 import model.Role;
 import model.User;
-
-import notification.Exit;
 import utils.ValidateUtils;
 
 import java.util.Random;
@@ -118,18 +116,35 @@ public class SignUp {
                 System.out.println("Select a role: ");
                 System.out.println("1. LEADER");
                 System.out.println("2. MEMBER");
-                int role = input.nextInt();
-                input.nextLine();
-                switch (role) {
-                    case 1:
-                        user.setRole(Role.LEADER);
-                        break;
-                    case 2:
-                        user.setRole(Role.MEMBER);
-                        break;
-                    default:
-                        System.out.println("Wrong input, please try again!");
-                        setRole(user);
+                try {
+                    int role = input.nextInt();
+                    input.nextLine();
+                    switch (role) {
+                        case 1:
+                            String code = "12345";
+                            String codeInput;
+                            System.out.println("Enter code: ");
+                            codeInput = input.nextLine();
+
+                            if(!codeInput.equals(code)){
+                                do {
+                                    System.out.println("Wrong code, please try again: ");
+                                    codeInput = input.nextLine();
+                                }while (!codeInput.equals(code));
+
+                            }
+                            user.setRole(Role.LEADER);
+                            break;
+                        case 2:
+                            user.setRole(Role.MEMBER);
+                            break;
+                        default:
+                            System.out.println("Wrong input, please try again!");
+                            setRole(user);
+                    }
+                }catch (Exception e){
+                    System.out.println("Wrong input, please try again!");
+                    setRole(user);
                 }
             }
 }
