@@ -5,13 +5,13 @@ import model.Task;
 import java.util.List;
 
 public interface ITasksManagement {
-    List<Task> getTasks();
+    List<Task> getTasks() ;
 
-    void addTask(Task newTask);
+    void addTask(Task newTask) ;
 
-    Task getByTaskId(long TaskId);
+    Task getByTaskId(long TaskId) ;
 
-    boolean existById(long TaskId);
+    boolean existById(long TaskId) ;
 
     void update(Task task);
 

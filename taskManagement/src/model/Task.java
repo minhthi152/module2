@@ -1,38 +1,41 @@
 package model;
 
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
-import java.util.Date;
-
 public class Task {
+    private static int number = 100;
     private int id;
     private String taskName;
     private String createDate;
     private String deadline;
     private String createdBy;
     private String updatedBy;
-    private boolean status;
+
+    private String lastUpdate;
+    private Status status;
     private String description;
 
-    public Task(String taskInfo) throws ParseException {
-        String[] taskFields = taskInfo.split(",");
-        id = Integer.parseInt(taskFields[0]);
-        taskName = taskFields[1];
-        SimpleDateFormat df = new SimpleDateFormat("dd-MM-yyyy");
-        createDate =taskFields[2];
-        deadline =taskFields[3];
-        createdBy = taskFields[4];
-        updatedBy = taskFields[5];
+    public Task(String line){
+        String[] taskFields = line.split(",");
+        this.id = Integer.parseInt(taskFields[0]);
+        this.taskName = taskFields[1];
+        this.createDate =taskFields[2];
+        this.deadline =taskFields[3];
+        this.createdBy = taskFields[4];
+        this.updatedBy = taskFields[5];
+        this.lastUpdate = taskFields[6];
+        this.status = Status.fromValue(taskFields[7]);
+        this.description = taskFields[8];
     }
 
-    public Task(int id, String taskName, String createDate,String deadline, User performer) {
-        this.id = id;
+    public Task(String taskName, String createDate,String deadline, User performer, String description) {
+        this.id = number++;
         this.taskName = taskName;
         this.createDate = createDate;
         this.deadline = deadline;
         this.createdBy = performer.getFullName();
-
-
+        this.updatedBy = "";
+        this.lastUpdate = "";
+        this.status = Status.PENDING;
+        this.description = description;
     }
 
 
@@ -81,11 +84,23 @@ public class Task {
         this.updatedBy = updatedBy;
     }
 
-    public boolean isStatus() {
+    public Status isStatus() {
         return status;
     }
 
-    public void setStatus(boolean status) {
+    public String getLastUpdate() {
+        return lastUpdate;
+    }
+
+    public void setLastUpdate(String lastUpdate) {
+        this.lastUpdate = lastUpdate;
+    }
+
+    public Status getStatus() {
+        return status;
+    }
+
+    public void setStatus(Status status) {
         this.status = status;
     }
 
@@ -95,5 +110,18 @@ public class Task {
 
     public void setDescription(String description) {
         this.description = description;
+    }
+
+    @Override
+    public String toString() {
+        return id +
+                "," + taskName +
+                "," + createDate +
+                "," + deadline +
+                "," + createdBy +
+                "," + updatedBy +
+                "," + lastUpdate +
+                "," + status +
+                "," + description;
     }
 }

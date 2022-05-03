@@ -222,7 +222,7 @@ public static void homeMenu(){
                 choice = Integer.parseInt(input.nextLine());
                 switch (choice){
                     case 1:
-                        TaskList.editProduct();
+                        TaskList.updateTask();
                         break;
                     case 10:
                         showMainMenu();

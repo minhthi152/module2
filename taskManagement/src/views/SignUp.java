@@ -84,7 +84,6 @@ public class SignUp {
                     userSignUp.add(user);
                     System.out.println("Sign up successfully!");
 
-
             boolean check = true;
             do {
                 System.out.println("Enter 'y' to sign in now, enter n to return and enter e to exit");
