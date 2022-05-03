@@ -214,21 +214,30 @@ public class TaskList {
         String taskName = input.nextLine().toUpperCase();
         SimpleDateFormat df = new SimpleDateFormat("dd-MM-yyyy");
         int count = 0;
-        System.out.println("---------------------------------------------------------------------------------------------------------");
-        System.out.printf("%-10s %-15s %-18s %-15s %-15s %-15s %-15s\n", "Id", "Task name", "Created Date", "Deadline", "Created by", "Updated by", "Status");
+
+
+        for (Task task : tasksList) {
+        }
+        System.out.println("--------------------------------------------------------------------------------------------------------------------------------------------------\n");
+
+
+        System.out.printf("%-10s %-20s %-18s %-15s %-15s %-15s %-20s %-15s %-15s\n", "Id", "Task name", "Create day", "Deadline", "Created by", "Updated by", "Last update", "Status", "Description");
+        System.out.println("--------------------------------------------------------------------------------------------------------------------------------------------------");
         for (int i = 0; i < tasksList.size(); i++) {
 
             if ((tasksList.get(i).getTaskName().toUpperCase()).contains(taskName)) {
-                System.out.println("---------------------------------------------------------------------------------------------------------");
-                System.out.printf("%-10s %-15s %-18s %-15s %-15s %-15s %-15s\n", tasksList.get(i).getId(), tasksList.get(i).getTaskName(), df.format(tasksList.get(i).getCreateDate()),
-                        df.format(tasksList.get(i).getDeadline()), tasksList.get(i).getCreatedBy(), tasksList.get(i).getUpdatedBy(), tasksList.get(i).isStatus());
+                System.out.printf("%-10s %-20s %-18s %-15s %-15s %-15s %-20s %-15s %-15s\n", tasksList.get(i).getId(), tasksList.get(i).getTaskName(), tasksList.get(i).getCreateDate(),
+                        tasksList.get(i).getDeadline(), tasksList.get(i).getCreatedBy(), tasksList.get(i).getUpdatedBy(), tasksList.get(i).getLastUpdate(), tasksList.get(i).isStatus(), tasksList.get(i).getDescription());
                 count++;
             }
 
         }
-        System.out.println("---------------------------------------------------------------------------------------------------------");
+        System.out.println("--------------------------------------------------------------------------------------------------------------------------------------------------");
         if (count == 0) {
             System.out.println("Not found!");
         }
     }
+
+
+
 }
