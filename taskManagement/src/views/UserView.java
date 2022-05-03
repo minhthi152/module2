@@ -1,6 +1,5 @@
 package views;
 
-import management.IUsersManagement;
 import management.UsersManagement;
 import model.User;
 import notification.WrongChoice;
@@ -13,19 +12,19 @@ import static notification.ReturnToMainMenu.returnMainMenu;
 
 
 public class UserView {
-    public static IUsersManagement usersManagement = new UsersManagement();
+    public static UsersManagement usersManagement = new UsersManagement();
     static Scanner input = new Scanner(System.in);
 
     public static void showMembers() {
-        System.out.println("----------------------------------------- MEMBERS LIST--------------------------------------- ");
-        System.out.printf("%-5s %-22s %-15s %-22s %-20s\n", "Id", "Full name", "Email", "Phone Number", "Username");
-        System.out.println("-----------------------------------------------------------------------------------------------------  ");
+        System.out.println("----MEMBERS LIST---------------------------------------------------------------------------------------------------- ");
+        System.out.printf("%-10s %-25s %-35s %-25s %-25s\n", "Id", "Full name", "Email", "Phone Number", "Username");
+        System.out.println("---------------------------------------------------------------------------------------------------------------------  ");
 
         List<User> users = usersManagement.getUsers();
         for (User user : users) {
-                System.out.printf("%-5d %-22s %-15s %-22s %-20s\n", user.getId(), user.getFullName(), user.getEmail(), user.getPhoneNumber(), user.getUserName());
+                System.out.printf("%-10s %-25s %-35s %-25s %-25s\n", user.getId(), user.getFullName(), user.getEmail(), user.getPhoneNumber(), user.getUserName());
         }
-        System.out.println("-----------------------------------------------------------------------------------------------------  ");
+        System.out.println("---------------------------------------------------------------------------------------------------------------------  ");
         System.out.println(" ");
     }
 
@@ -45,7 +44,6 @@ public class UserView {
                 System.out.println("---------------------------");
                 System.out.println("Enter your choice: ");
                 int choice = input.nextInt();
-                input.nextLine();
                 User user = new User();
                 user.setId(id);
                 switch (choice) {
@@ -126,6 +124,16 @@ public class UserView {
         List<User> usersList = usersManagement.getUsers();
         for (User user: usersList) {
             if(user.getId() == id){
+                return user;
+            }
+        }
+        return null;
+    }
+
+    public static User findUserByUsername(String username) {
+        List<User> usersList = usersManagement.getUsers();
+        for (User user: usersList) {
+            if(user.getUserName().equals(username)){
                 return user;
             }
         }

@@ -21,6 +21,12 @@ public class TasksManagement implements ITasksManagement{
     }
 
     @Override
+    public void update() {
+        CSVUtils.write(path,tasksList);
+    }
+
+
+    @Override
     public void addTask(Task newTask) {
         tasksList.add(newTask);
         CSVUtils.write(path,tasksList);
@@ -39,6 +45,15 @@ public class TasksManagement implements ITasksManagement{
     @Override
     public boolean existById(long TaskId) {
         return getByTaskId(TaskId) != null;
+    }
+
+    @Override
+    public boolean checkDuplicateId(int id) {
+        for (Task task : tasksList) {
+            if (task.getId() == id)
+                return true;
+        }
+        return false;
     }
 
     @Override

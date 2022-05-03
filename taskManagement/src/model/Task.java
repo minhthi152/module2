@@ -26,12 +26,12 @@ public class Task {
         this.description = taskFields[8];
     }
 
-    public Task(String taskName, String createDate,String deadline, User performer, String description) {
+    public Task(String taskName, String createDate,String deadline, User creator, String description) {
         this.id = number++;
         this.taskName = taskName;
         this.createDate = createDate;
         this.deadline = deadline;
-        this.createdBy = performer.getFullName();
+        this.createdBy = creator.getFullName();
         this.updatedBy = "";
         this.lastUpdate = "";
         this.status = Status.PENDING;

@@ -8,6 +8,19 @@ import java.nio.file.Paths;
 import java.util.List;
 
 public class CSVUtils {
+
+//    public static <T> void write(String path, Object o){
+//        try {
+//            FileWriter fw = new FileWriter(path, true);
+//
+//                fw.write(o.toString());
+//
+//            fw.flush();
+//            fw.close();
+//        } catch (Exception e) {
+//            throw new IllegalArgumentException(path + "invalid");
+//        }
+//    }
     public static <T> void write(String path, List<T> items){
         try {
             PrintWriter pw = new PrintWriter(path);

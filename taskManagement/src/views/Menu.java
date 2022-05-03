@@ -40,7 +40,7 @@ public static void homeMenu(){
         System.out.println("| 1. Add a new task        |");
         System.out.println("| 2. Show tasks            |");
         System.out.println("| 3. Delete task           |");
-        System.out.println("| 4. Edit a task           |");
+        System.out.println("| 4. Update a task         |");
         System.out.println("| 5. Sort tasks            |");
         System.out.println("| 6. Search tasks          |");
         System.out.println("| 7. Members management    |");
@@ -63,7 +63,7 @@ public static void homeMenu(){
                         showDeleteMenu();
                         break;
                     case 4:
-                        showEditMenu();
+                        TaskList.updateTask();
                         break;
 //                    case 5:
 //                        showMenuSort();
@@ -209,37 +209,8 @@ public static void homeMenu(){
         }
 
     }
-    public static void showEditMenu(){
-        System.out.println("------------Edit-----------");
-        System.out.println("| 1. Edit a task          |");
-        System.out.println("| 10. Back to home page   |");
-        System.out.println("---------------------------");
-        int choice = -1;
 
-        while (choice != 0){
-            Scanner input = new Scanner(System.in);
-            try{
-                choice = Integer.parseInt(input.nextLine());
-                switch (choice){
-                    case 1:
-                        TaskList.updateTask();
-                        break;
-                    case 10:
-                        showMainMenu();
-                        break;
-                    default:
-                        WrongChoice.chooseWrong();
-                        showEditMenu();
-                }
 
-            }
-            catch (Exception e){
-                WrongChoice.chooseWrong();
-                showEditMenu();
-            }
-
-        }
-    }
     public static void menuMemberManagement() {
         System.out.println("-----------------------------------");
         System.out.println("|                                  |");
