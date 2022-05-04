@@ -21,6 +21,7 @@ public class TaskList {
 
     //Add a task to task list
     public static void addTask()  {
+        tasksManagement.getTasks();
 //        System.out.println("Enter an id: ");
 //        int id = Integer.parseInt(input.nextLine());
         System.out.println("1. Enter task name: ");
@@ -37,11 +38,11 @@ public class TaskList {
 //           System.out.println(a);
        }
 
-//       User creator = UserView.findUserByUsername(SignIn.currentUsername);
+       User creator = UserView.findUserByUsername(SignIn.currentUsername);
 
-        System.out.println("3. Enter ID of creator: ");
-        int creatorId = Integer.parseInt(input.nextLine());
-        User creator =  UserView.findUserById(creatorId);
+//        System.out.println("3. Enter ID of creator: ");
+//        int creatorId = Integer.parseInt(input.nextLine());
+//        User creator =  UserView.findUserById(creatorId);
         System.out.println("3. Add a description: ");
         String description = input.nextLine();
 
