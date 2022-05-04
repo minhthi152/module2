@@ -2,6 +2,7 @@ package views;
 
 import notification.Exit;
 import notification.WrongChoice;
+import sort.SortTaskList;
 
 import java.util.Scanner;
 
@@ -66,9 +67,9 @@ public static void homeMenu(){
                     case 4:
                         TaskList.updateTask();
                         break;
-//                    case 5:
-//                        showMenuSort();
-//                        break;
+                    case 5:
+                        showMenuSort();
+                        break;
                     case 6:
                         TaskList.searchTaskByName();
                         break;
@@ -90,6 +91,49 @@ public static void homeMenu(){
             }
 
         }
+
+    }
+
+    private static void showMenuSort() {
+        System.out.println("-----------------------------");
+        System.out.println("| 1. Sort by deadline ASC    |");
+        System.out.println("| 2. Sort by create day ASC  |");
+        System.out.println("| 3. Sort by task name       |");
+        System.out.println("| 4. Return                  |");
+        System.out.println("-----------------------------");
+        int choice = -1;
+
+        while (choice != 0){
+
+            try{
+                choice = Integer.parseInt(input.nextLine());;
+                switch (choice){
+                    case 1:
+                        SortTaskList.sortByDeadlineAsc();
+                        break;
+                    case 2:
+//                        TaskList.sortByCreateDayASC();
+                        break;
+                    case 3:
+                        SortTaskList.sortByTaskNameAsc();
+                        break;
+                    case 4:
+                        showMainMenu();
+                        break;
+                    default:
+                        WrongChoice.chooseWrong();
+                        showMenuSort();
+                }
+
+            }
+            catch (Exception e){
+                e.printStackTrace();
+                WrongChoice.chooseWrong();
+                showMenuSort();
+            }
+
+        }
+
 
     }
 
@@ -147,6 +191,13 @@ public static void homeMenu(){
                     case 1:
                         System.out.println("Show all tasks");
                         TaskList.showAllTasks();
+                        System.out.println("Enter any other keys to return: ");
+                        String selection = input.nextLine();
+                        switch (selection){
+                            default:
+                                Menu.showMainMenu();
+                                break;
+                        }
                         break;
                     case 2:
                         System.out.println("Show pending tasks");;

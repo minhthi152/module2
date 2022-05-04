@@ -85,25 +85,28 @@ public class TaskList {
                     task.getDeadline(), task.getCreatedBy(),task.getPerformers(), task.getUpdatedBy(), task.getLastUpdate(), task.isStatus(), task.getDescription());
         }
         System.out.println("-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------\n");
+
+
+
     }
 
     //Edit task
     public static void updateTask(){
         showAllTasks();
         tasksManagement.getTasks();
-        int id;
+        long id;
 
        try {
            System.out.println("Enter ID of the task you want to update: ");
-           id = Integer.parseInt(input.nextLine());
+           id = Long.parseLong(input.nextLine());
 
            while(!tasksManagement.existById(id)){
                System.out.println("ID does not exist, please enter a right ID : ");
-               id = Integer.parseInt(input.nextLine());
+               id = Long.parseLong(input.nextLine());
            }
        }catch (Exception e){
            System.out.println("ID does not exist, please enter a right ID : ");
-           id = Integer.parseInt(input.nextLine());
+           id = Long.parseLong(input.nextLine());
        }
 
 
@@ -198,6 +201,8 @@ public class TaskList {
             }finally {
                 String lastUpdate = LocalDateTime.now().format(DateTimeFormatter.ofPattern("dd-MM-yyyy HH:mm"));
                 task.setLastUpdate(lastUpdate);
+                User updatedBy = UserView.findUserByUsername(SignIn.currentUsername);
+                task.setUpdatedBy(updatedBy.getFullName());
                 tasksManagement.update();
             }
         }
@@ -209,7 +214,7 @@ public class TaskList {
         showAllTasks();
         System.out.println("Enter the id of the task you want to delete: ");
 
-        int id = Integer.parseInt(input.nextLine());
+        long id = Long.parseLong(input.nextLine());
 
         Task task = tasksManagement.getByTaskId(id);
         if(task == null){

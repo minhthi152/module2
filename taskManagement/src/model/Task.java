@@ -40,7 +40,6 @@ public class Task {
         this.lastUpdate = "";
         this.status = Status.PENDING;
         this.description = description;
-//        100,thi,04-05-2022,23-05-2022,Thi Pham,e,2,Thi Pham - Ngan Huynh -,e,PENDING,ok
     }
 
     public int getNumberOfPerformer() {

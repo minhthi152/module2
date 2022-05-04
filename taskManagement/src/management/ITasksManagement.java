@@ -13,7 +13,7 @@ public interface ITasksManagement {
     Task getByTaskId(long TaskId) ;
 
     boolean existById(long TaskId) ;
-    boolean checkDuplicateId(int id);
+    boolean checkDuplicateId(long id);
 
     void update(Task task);
 

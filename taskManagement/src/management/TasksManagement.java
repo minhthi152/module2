@@ -48,7 +48,7 @@ public class TasksManagement implements ITasksManagement{
     }
 
     @Override
-    public boolean checkDuplicateId(int id) {
+    public boolean checkDuplicateId(long id) {
         for (Task task : tasksList) {
             if (task.getId() == id)
                 return true;
