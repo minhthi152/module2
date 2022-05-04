@@ -18,8 +18,8 @@ public class Notice {
         List<Task> tasksList = tasksManagement.getTasks();
         int count = 0;
         System.out.println("---HURRY UP!---------------------------------------------------------------------------------------------------------------------------------------------------");
-        System.out.printf("%-10s %-20s %-18s %-15s %-15s %-15s %-20s %-15s %-15s\n", "Id", "Task name", "Create day", "Deadline", "Created by", "Updated by", "Last update", "Status", "Description");
-        System.out.println("---------------------------------------------------------------------------------------------------------------------------------------------------------------");
+        System.out.printf("%-10s %-20s %-18s %-15s %-15s %-30s %-15s %-20s %-15s %-15s\n", "Id", "Task name", "Create day", "Deadline", "Created by", "Performers","Updated by", "Last update", "Status", "Description");
+        System.out.println("--------------------------------------------------------------------------------------------------------------------------------------------------");
 
         for (Task task: tasksList) {
 
@@ -28,8 +28,8 @@ public class Notice {
             if(dif<=7 && task.getStatus() != Status.COMPLETED){
 //                System.out.println(dif);
 
-                    System.out.printf("%-10s %-20s %-18s %-15s %-15s %-15s %-20s %-15s %-15s\n", task.getId(), task.getTaskName(), task.getCreateDate(),
-                            task.getDeadline(), task.getCreatedBy(), task.getUpdatedBy(), task.getLastUpdate(), task.isStatus(), task.getDescription());
+                System.out.printf("%-10s %-20s %-18s %-15s %-15s %-30s %-15s %-20s %-15s %-15s\n", task.getId(), task.getTaskName(), task.getCreateDate(),
+                        task.getDeadline(), task.getCreatedBy(),task.getPerformers(), task.getUpdatedBy(), task.getLastUpdate(), task.isStatus(), task.getDescription());
                 count++;
             }
         }

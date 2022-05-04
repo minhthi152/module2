@@ -27,7 +27,7 @@ public class TaskList {
         System.out.println("1. Enter task name: ");
         String taskName = input.nextLine();
         String createdDate = LocalDate.now().format(DateTimeFormatter.ofPattern("dd-MM-yyyy"));
-        System.out.println("1. Enter a deadline: ");
+        System.out.println("2. Enter a deadline: ");
         String deadline = input.nextLine();
 
 //        int a = (ValidateUtils.toISODate(deadline)).compareTo(ValidateUtils.toTodayISO(LocalDate.now().toString()));
@@ -40,13 +40,21 @@ public class TaskList {
 
        User creator = UserView.findUserByUsername(SignIn.currentUsername);
 
+        System.out.println("3. Enter number of performers: ");
+        int numberOfPerfomers = Integer.parseInt(input.nextLine());
+        String performers = "";
+        for(int i = 0; i<numberOfPerfomers-1; i++){
+            System.out.println("4. Enter ID of performer " + i + ": ");
+            int performerID = Integer.parseInt(input.nextLine());
+            performers += UserView.findUserById(performerID).getFullName() + " ";
+        }
 //        System.out.println("3. Enter ID of creator: ");
 //        int creatorId = Integer.parseInt(input.nextLine());
 //        User creator =  UserView.findUserById(creatorId);
-        System.out.println("3. Add a description: ");
+        System.out.println("5. Add a description: ");
         String description = input.nextLine();
 
-        Task task = new Task(taskName, createdDate, deadline, creator, description);
+        Task task = new Task(taskName, createdDate, deadline, creator,numberOfPerfomers,performers.trim(), description);
         tasksManagement.addTask(task);
         System.out.println("Successfully added task!");
 
@@ -67,12 +75,12 @@ public class TaskList {
     public static void showAllTasks() {
         List<Task> tasksList = tasksManagement.getTasks();
         System.out.println("---ALL TASKS--------------------------------------------------------------------------------------------------------------------------------------");
-        System.out.printf("%-10s %-20s %-18s %-15s %-15s %-15s %-20s %-15s %-15s\n", "Id", "Task name", "Create day", "Deadline", "Created by", "Updated by", "Last update", "Status", "Description");
+        System.out.printf("%-10s %-20s %-18s %-15s %-15s %-30s %-15s %-20s %-15s %-15s\n", "Id", "Task name", "Create day", "Deadline", "Created by", "Performers","Updated by", "Last update", "Status", "Description");
         System.out.println("--------------------------------------------------------------------------------------------------------------------------------------------------");
 
         for (Task task : tasksList) {
-            System.out.printf("%-10s %-20s %-18s %-15s %-15s %-15s %-20s %-15s %-15s\n", task.getId(), task.getTaskName(), task.getCreateDate(),
-                    task.getDeadline(), task.getCreatedBy(), task.getUpdatedBy(), task.getLastUpdate(), task.isStatus(), task.getDescription());
+            System.out.printf("%-10s %-20s %-18s %-15s %-15s %-30s %-15s %-20s %-15s %-15s\n", task.getId(), task.getTaskName(), task.getCreateDate(),
+                    task.getDeadline(), task.getCreatedBy(),task.getPerformers(), task.getUpdatedBy(), task.getLastUpdate(), task.isStatus(), task.getDescription());
         }
         System.out.println("--------------------------------------------------------------------------------------------------------------------------------------------------\n");
     }
