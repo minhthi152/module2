@@ -1,9 +1,7 @@
 package model;
 
 public class Task {
-
-    private static int number = 100;
-    private int id;
+    private long id;
     private String taskName;
     private String createDate;
     private String deadline;
@@ -17,21 +15,21 @@ public class Task {
 
     public Task(String line){
         String[] taskFields = line.split(",");
-        this.id = Integer.parseInt(taskFields[0]);
+        this.id = Long.parseLong(taskFields[0]);
         this.taskName = taskFields[1];
         this.createDate =taskFields[2];
         this.deadline =taskFields[3];
         this.createdBy = taskFields[4];
         this.numberOfPerformer = Integer.parseInt(taskFields[5]);
-        this.performers = taskFields[5];
-        this.updatedBy = taskFields[6];
-        this.lastUpdate = taskFields[7];
-        this.status = Status.fromValue(taskFields[8]);
-        this.description = taskFields[9];
+        this.performers = taskFields[6];
+        this.updatedBy = taskFields[7];
+        this.lastUpdate = taskFields[8];
+        this.status = Status.fromValue(taskFields[9]);
+        this.description = taskFields[10];
     }
 
     public Task(String taskName, String createDate,String deadline, User creator, int numberOfPerformer, String performers , String description) {
-        this.id = number++;
+        this.id = System.currentTimeMillis()/1000;
         this.taskName = taskName;
         this.createDate = createDate;
         this.deadline = deadline;
@@ -42,6 +40,7 @@ public class Task {
         this.lastUpdate = "";
         this.status = Status.PENDING;
         this.description = description;
+//        100,thi,04-05-2022,23-05-2022,Thi Pham,e,2,Thi Pham - Ngan Huynh -,e,PENDING,ok
     }
 
     public int getNumberOfPerformer() {
@@ -76,7 +75,7 @@ public class Task {
         this.deadline = deadline;
     }
 
-    public int getId() {
+    public long getId() {
         return id;
     }
 
@@ -139,9 +138,9 @@ public class Task {
                 "," + createDate +
                 "," + deadline +
                 "," + createdBy +
-                "," + updatedBy +
                 "," + numberOfPerformer +
                 "," + performers +
+                "," + updatedBy +
                 "," + lastUpdate +
                 "," + status +
                 "," + description;

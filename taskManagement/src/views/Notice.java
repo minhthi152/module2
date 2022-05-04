@@ -15,25 +15,27 @@ public class Notice {
     static Scanner input = new Scanner(System.in);
     public static void showNotice(){
 
+
         List<Task> tasksList = tasksManagement.getTasks();
         int count = 0;
-        System.out.println("---HURRY UP!---------------------------------------------------------------------------------------------------------------------------------------------------");
+        System.out.println("---HURRY UP!-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------");
         System.out.printf("%-10s %-20s %-18s %-15s %-15s %-30s %-15s %-20s %-15s %-15s\n", "Id", "Task name", "Create day", "Deadline", "Created by", "Performers","Updated by", "Last update", "Status", "Description");
-        System.out.println("--------------------------------------------------------------------------------------------------------------------------------------------------");
+        System.out.println("-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------");
 
         for (Task task: tasksList) {
 
             long dif = calculateDays(task.getDeadline());
 //            System.out.println(dif);
-            if(dif<=7 && task.getStatus() != Status.COMPLETED){
+            if(dif<=7 && task.getStatus() != Status.COMPLETED &&  (task.getPerformers()).contains(UserView.findUserByUsername(SignIn.currentUsername).getFullName())){
 //                System.out.println(dif);
 
                 System.out.printf("%-10s %-20s %-18s %-15s %-15s %-30s %-15s %-20s %-15s %-15s\n", task.getId(), task.getTaskName(), task.getCreateDate(),
                         task.getDeadline(), task.getCreatedBy(),task.getPerformers(), task.getUpdatedBy(), task.getLastUpdate(), task.isStatus(), task.getDescription());
                 count++;
             }
+
         }
-        System.out.println("---------------------------------------------------------------------------------------------------------------------------------------------------------------\n");
+        System.out.println("------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------\n");
         if(count==0){
             System.out.println("Wow! you dont have any tasks this week.");
         } else if (count == 1) {

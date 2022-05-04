@@ -43,18 +43,20 @@ public class TaskList {
         System.out.println("3. Enter number of performers: ");
         int numberOfPerfomers = Integer.parseInt(input.nextLine());
         String performers = "";
-        for(int i = 0; i<numberOfPerfomers-1; i++){
-            System.out.println("4. Enter ID of performer " + i + ": ");
+        for(int i = 0; i<numberOfPerfomers; i++){
+            System.out.println("4. Enter ID of performer " + (i+1) + ": ");
             int performerID = Integer.parseInt(input.nextLine());
-            performers += UserView.findUserById(performerID).getFullName() + " ";
+
+            performers += UserView.findUserById(performerID).getFullName() + " - ";
         }
+        performers = performers.substring(0, performers.length()-2);
 //        System.out.println("3. Enter ID of creator: ");
 //        int creatorId = Integer.parseInt(input.nextLine());
 //        User creator =  UserView.findUserById(creatorId);
         System.out.println("5. Add a description: ");
         String description = input.nextLine();
 
-        Task task = new Task(taskName, createdDate, deadline, creator,numberOfPerfomers,performers.trim(), description);
+        Task task = new Task(taskName.trim(), createdDate.trim(), deadline.trim(), creator,numberOfPerfomers,performers.trim(), description.trim());
         tasksManagement.addTask(task);
         System.out.println("Successfully added task!");
 
@@ -74,23 +76,37 @@ public class TaskList {
     //    Show task
     public static void showAllTasks() {
         List<Task> tasksList = tasksManagement.getTasks();
-        System.out.println("---ALL TASKS--------------------------------------------------------------------------------------------------------------------------------------");
+        System.out.println("---ALL TASKS-------------------------------------------------------------------------------------------------------------------------------------------------------------------------");
         System.out.printf("%-10s %-20s %-18s %-15s %-15s %-30s %-15s %-20s %-15s %-15s\n", "Id", "Task name", "Create day", "Deadline", "Created by", "Performers","Updated by", "Last update", "Status", "Description");
-        System.out.println("--------------------------------------------------------------------------------------------------------------------------------------------------");
+        System.out.println("-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------");
 
         for (Task task : tasksList) {
             System.out.printf("%-10s %-20s %-18s %-15s %-15s %-30s %-15s %-20s %-15s %-15s\n", task.getId(), task.getTaskName(), task.getCreateDate(),
                     task.getDeadline(), task.getCreatedBy(),task.getPerformers(), task.getUpdatedBy(), task.getLastUpdate(), task.isStatus(), task.getDescription());
         }
-        System.out.println("--------------------------------------------------------------------------------------------------------------------------------------------------\n");
+        System.out.println("-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------\n");
     }
 
     //Edit task
     public static void updateTask(){
         showAllTasks();
         tasksManagement.getTasks();
-        System.out.println("Enter ID of the task you want to update: ");
-        int id = Integer.parseInt(input.nextLine());
+        int id;
+
+       try {
+           System.out.println("Enter ID of the task you want to update: ");
+           id = Integer.parseInt(input.nextLine());
+
+           while(!tasksManagement.existById(id)){
+               System.out.println("ID does not exist, please enter a right ID : ");
+               id = Integer.parseInt(input.nextLine());
+           }
+       }catch (Exception e){
+           System.out.println("ID does not exist, please enter a right ID : ");
+           id = Integer.parseInt(input.nextLine());
+       }
+
+
         Task task = tasksManagement.getByTaskId(id);
         if(tasksManagement.checkDuplicateId(id)){
             System.out.println("------------------------------");

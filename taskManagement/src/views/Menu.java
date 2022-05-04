@@ -1,6 +1,5 @@
 package views;
 
-
 import notification.Exit;
 import notification.WrongChoice;
 
@@ -30,8 +29,10 @@ public static void homeMenu(){
                    Exit.exitProgram();
            }
        }catch (Exception e){
+           e.printStackTrace();
            WrongChoice.chooseWrong();
            homeMenu();
+
        }
     }
 }
@@ -93,17 +94,18 @@ public static void homeMenu(){
     }
 
     public static void showAddMenu(){
+        System.out.println("------------Add task--------");
+        System.out.println("| 1. Add a task            |");
+        System.out.println("| 10. Back to home page    |");
+        System.out.println("----------------------------");
+        System.out.println("Enter your choice: ");
+
         int choice = -1;
 
         while (choice != 0){
-            System.out.println("------------Add task--------");
-            System.out.println("| 1. Add a task            |");
-            System.out.println("| 10. Back to home page    |");
-            System.out.println("----------------------------");
-            System.out.println("Enter your choice: ");
 
             try{
-                choice = input.nextInt();
+                choice = Integer.parseInt(input.nextLine());;
                 switch (choice){
                     case 1:
                         System.out.println("Add a task");
@@ -138,7 +140,6 @@ public static void homeMenu(){
         int choice = -1;
 
         while (choice != 0){
-            Scanner input = new Scanner(System.in);
 
             try{
                 choice = Integer.parseInt(input.nextLine());
@@ -166,6 +167,7 @@ public static void homeMenu(){
 
             }
             catch (Exception e){
+                e.printStackTrace();
                 WrongChoice.chooseWrong();
                 showTasks();
             }
