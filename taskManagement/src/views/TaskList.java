@@ -1,9 +1,8 @@
 package views;
 
 import management.TasksManagement;
-import model.Status;
-import model.Task;
-import model.User;
+import management.UsersManagement;
+import model.*;
 import notification.WrongChoice;
 import utils.ValidateUtils;
 
@@ -11,16 +10,18 @@ import java.text.SimpleDateFormat;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 
 public class TaskList {
     public static TasksManagement tasksManagement = new TasksManagement();
+    public static UsersManagement usersManagement = UsersManagement.getInstance();
 
     static Scanner input = new Scanner(System.in);
 
     //Add a task to task list
-    public static void addTask()  {
+    public static void addTask() {
         tasksManagement.getTasks();
 //        System.out.println("Enter an id: ");
 //        int id = Integer.parseInt(input.nextLine());
@@ -32,37 +33,70 @@ public class TaskList {
 
 //        int a = (ValidateUtils.toISODate(deadline)).compareTo(ValidateUtils.toTodayISO(LocalDate.now().toString()));
 //        System.out.println(a);
-       while (!ValidateUtils.isDateValid(deadline)|| (ValidateUtils.toISODate(deadline)).compareTo(ValidateUtils.toTodayISO(LocalDate.now().toString()))<0){
-           System.out.println("Invalid deadline, please enter a valid deadline:  ");
-           deadline = input.nextLine();
+        while (!ValidateUtils.isDateValid(deadline) || (ValidateUtils.toISODate(deadline)).compareTo(ValidateUtils.toTodayISO(LocalDate.now().toString())) < 0) {
+            System.out.println("Invalid deadline, please enter a valid deadline:  ");
+            deadline = input.nextLine();
 //           System.out.println(a);
-       }
-
-       User creator = UserView.findUserByUsername(SignIn.currentUsername);
-
-        System.out.println("3. Enter number of performers: ");
-        int numberOfPerfomers = Integer.parseInt(input.nextLine());
-        String performers = "";
-        for(int i = 0; i<numberOfPerfomers; i++){
-            System.out.println("4. Enter ID of performer " + (i+1) + ": ");
-            int performerID = Integer.parseInt(input.nextLine());
-
-            performers += UserView.findUserById(performerID).getFullName() + " - ";
         }
-        performers = performers.substring(0, performers.length()-2);
+
+        User creator = UserView.findUserByUsername(SignIn.currentUsername);
+
+
+//        int numberOfPerfomers = -1;
+//        do {
+//            System.out.println("3. Enter a number of performer (from 1 to 5): ");
+//            String temp = input.nextLine();
+//            if (!ValidateUtils.isNumberFrom1To5Valid(temp)) {
+//                System.out.println("You enter an invalid input, please try again! ");
+//                continue;
+//            }
+//            numberOfPerfomers = Integer.parseInt(temp);
+//            break;
+//        } while (true);
+
+
+//        String performers = "";
+//        for (int i = 0; i < numberOfPerfomers; i++) {
+//            System.out.println("4. Enter ID of performer " + (i + 1) + ": ");
+//            int performerID = Integer.parseInt(input.nextLine());
+//
+//            performers += usersManagement.getUserById(performerID).getFullName() + " - ";
+//        }
+//        performers = performers.substring(0, performers.length() - 2);
+
+
 //        System.out.println("3. Enter ID of creator: ");
 //        int creatorId = Integer.parseInt(input.nextLine());
 //        User creator =  UserView.findUserById(creatorId);
         System.out.println("5. Add a description: ");
         String description = input.nextLine();
 
-        Task task = new Task(taskName.trim(), createdDate.trim(), deadline.trim(), creator,numberOfPerfomers,performers.trim(), description.trim());
+        // Task task = new Task(taskName.trim(), createdDate.trim(), deadline.trim(), creator, numberOfPerfomers, performers.trim(), description.trim());
+        // Task task = new Task(taskName.trim(), createdDate.trim(), deadline.trim(), permissions, Status.PENDING, description);
+        Task task = null;
         tasksManagement.addTask(task);
         System.out.println("Successfully added task!");
-
+        List<Permission> permissions = new ArrayList<>();
+        boolean isRetry = false;
+        do {
+            UserView.showMembers();
+            System.out.println("Enter ID of performer: ");
+            int performerID = Integer.parseInt(input.nextLine());
+            User performer = usersManagement.getUserById(performerID);
+            if (performer == null)
+                System.out.println("Nhap Lai");
+            else {
+                //Option Quyen
+                int value = 0;
+                Permission permission = new Permission(performer.getId(), performer.getId(), task.getId(), performer.getFullName(), PermissionType.parsePermissionType(value));
+                permissions.add(permission);
+            }
+            //Muon them nguoi tiep theo khong?
+//            //isRetry=true;
+        } while (isRetry);
         System.out.println("Enter y to continue adding or any other key to return");
         String choice = input.nextLine();
-        switch (choice){
+        switch (choice) {
             case "y":
                 addTask();
                 break;
@@ -77,41 +111,39 @@ public class TaskList {
     public static void showAllTasks() {
         List<Task> tasksList = tasksManagement.getTasks();
         System.out.println("---ALL TASKS-------------------------------------------------------------------------------------------------------------------------------------------------------------------------");
-        System.out.printf("%-10s %-20s %-18s %-15s %-15s %-30s %-15s %-20s %-15s %-15s\n", "Id", "Task name", "Create day", "Deadline", "Created by", "Performers","Updated by", "Last update", "Status", "Description");
+        System.out.printf("%-10s %-20s %-18s %-15s %-15s %-30s %-15s %-20s %-15s %-15s\n", "Id", "Task name", "Create day", "Deadline", "Created by", "Performers", "Updated by", "Last update", "Status", "Description");
         System.out.println("-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------");
 
         for (Task task : tasksList) {
-            System.out.printf("%-10s %-20s %-18s %-15s %-15s %-30s %-15s %-20s %-15s %-15s\n", task.getId(), task.getTaskName(), task.getCreateDate(),
-                    task.getDeadline(), task.getCreatedBy(),task.getPerformers(), task.getUpdatedBy(), task.getLastUpdate(), task.isStatus(), task.getDescription());
+            System.out.printf("%-10s %-20s %-18s %-15s %-15s %-30s %-15s %-20s %-15s %-15s\n", task.getId(), task.getTaskName(), task.getCreateDate(), task.getDeadline(), task.getCreatedBy(), task.getPerformers(), task.getUpdatedBy(), task.getLastUpdate(), task.isStatus(), task.getDescription());
         }
         System.out.println("-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------\n");
-
 
 
     }
 
     //Edit task
-    public static void updateTask(){
+    public static void updateTask() {
         showAllTasks();
         tasksManagement.getTasks();
-        long id;
 
-       try {
-           System.out.println("Enter ID of the task you want to update: ");
-           id = Long.parseLong(input.nextLine());
+        long id = -1;
+        do {
+            System.out.println("3. Enter Enter the id of the task you want to delete: ");
+            String temp = input.nextLine();
+            if (!ValidateUtils.isNumberValid(temp) || !tasksManagement.existById(Long.parseLong(temp))) {
+                System.out.println("You enter an invalid input, please try again! ");
+                continue;
+            }
+            id = Long.parseLong(temp);
 
-           while(!tasksManagement.existById(id)){
-               System.out.println("ID does not exist, please enter a right ID : ");
-               id = Long.parseLong(input.nextLine());
-           }
-       }catch (Exception e){
-           System.out.println("ID does not exist, please enter a right ID : ");
-           id = Long.parseLong(input.nextLine());
-       }
+            break;
+
+        } while (true);
 
 
         Task task = tasksManagement.getByTaskId(id);
-        if(tasksManagement.checkDuplicateId(id)){
+        if (tasksManagement.checkDuplicateId(id)) {
             System.out.println("------------------------------");
             System.out.println("|  1. Edit task name         |");
             System.out.println("|  2. Update deadline        |");
@@ -122,7 +154,7 @@ public class TaskList {
             System.out.println("Enter your choice: ");
             try {
                 int choice = Integer.parseInt(input.nextLine());
-                switch (choice){
+                switch (choice) {
                     case 1:
                         System.out.println("Enter new task name: ");
                         String newTaskname = input.nextLine();
@@ -135,7 +167,7 @@ public class TaskList {
                         String deadline = input.nextLine();
 //        int a = (ValidateUtils.toISODate(deadline)).compareTo(ValidateUtils.toTodayISO(LocalDate.now().toString()));
 //        System.out.println(a);
-                        while (!ValidateUtils.isDateValid(deadline)|| (ValidateUtils.toISODate(deadline)).compareTo(ValidateUtils.toTodayISO(LocalDate.now().toString()))<0){
+                        while (!ValidateUtils.isDateValid(deadline) || (ValidateUtils.toISODate(deadline)).compareTo(ValidateUtils.toTodayISO(LocalDate.now().toString())) < 0) {
                             System.out.println("Invalid deadline, please enter a valid deadline:  ");
                             deadline = input.nextLine();
 //        System.out.println(a);
@@ -155,7 +187,7 @@ public class TaskList {
                                 System.out.println("3. COMPLETED");
                                 System.out.println("Enter your choice: ");
                                 int selection = Integer.parseInt(input.nextLine());
-                                switch (selection){
+                                switch (selection) {
                                     case 1:
                                         task.setStatus(Status.PENDING);
                                         tasksManagement.update();
@@ -176,11 +208,11 @@ public class TaskList {
                                         is = false;
 
                                 }
-                            }catch (Exception e){
+                            } catch (Exception e) {
                                 WrongChoice.chooseWrong();
                                 is = false;
                             }
-                        }while (!is);
+                        } while (!is);
                         break;
                     case 4:
                         System.out.println("Enter description: ");
@@ -189,16 +221,17 @@ public class TaskList {
                         tasksManagement.update();
                         System.out.println("Successfully update description!");
                         break;
-                    case 5: Menu.showMainMenu();
+                    case 5:
+                        Menu.showMainMenu();
                         break;
                     default:
                         WrongChoice.chooseWrong();
                         updateTask();
                 }
-            }catch (Exception e){
+            } catch (Exception e) {
                 WrongChoice.chooseWrong();
                 updateTask();
-            }finally {
+            } finally {
                 String lastUpdate = LocalDateTime.now().format(DateTimeFormatter.ofPattern("dd-MM-yyyy HH:mm"));
                 task.setLastUpdate(lastUpdate);
                 User updatedBy = UserView.findUserByUsername(SignIn.currentUsername);
@@ -212,21 +245,31 @@ public class TaskList {
     //Delete a task
     public static void deleteTask() {
         showAllTasks();
-        System.out.println("Enter the id of the task you want to delete: ");
 
-        long id = Long.parseLong(input.nextLine());
+        long id = -1;
+        do {
+            System.out.println("3. Enter Enter the id of the task you want to delete: ");
+            String temp = input.nextLine();
+            if (!ValidateUtils.isNumberValid(temp)) {
+                System.out.println("You enter an invalid input, please try again! ");
+                continue;
+            }
+            id = Long.parseLong(temp);
+            break;
+        } while (true);
+
 
         Task task = tasksManagement.getByTaskId(id);
-        if(task == null){
+        if (task == null) {
             System.out.println("Task with ID " + id + " does not exist!");
-        }else{
+        } else {
 
             tasksManagement.remove(task);
             System.out.println("Task removed successfully!");
         }
         System.out.println("Enter y to continue deleting or any other key to return");
         String choice = input.nextLine();
-        switch (choice){
+        switch (choice) {
             case "y":
                 deleteTask();
                 break;
@@ -256,8 +299,7 @@ public class TaskList {
         for (int i = 0; i < tasksList.size(); i++) {
 
             if ((tasksList.get(i).getTaskName().toUpperCase()).contains(taskName)) {
-                System.out.printf("%-10s %-20s %-18s %-15s %-15s %-15s %-20s %-15s %-15s\n", tasksList.get(i).getId(), tasksList.get(i).getTaskName(), tasksList.get(i).getCreateDate(),
-                        tasksList.get(i).getDeadline(), tasksList.get(i).getCreatedBy(), tasksList.get(i).getUpdatedBy(), tasksList.get(i).getLastUpdate(), tasksList.get(i).isStatus(), tasksList.get(i).getDescription());
+                System.out.printf("%-10s %-20s %-18s %-15s %-15s %-15s %-20s %-15s %-15s\n", tasksList.get(i).getId(), tasksList.get(i).getTaskName(), tasksList.get(i).getCreateDate(), tasksList.get(i).getDeadline(), tasksList.get(i).getCreatedBy(), tasksList.get(i).getUpdatedBy(), tasksList.get(i).getLastUpdate(), tasksList.get(i).isStatus(), tasksList.get(i).getDescription());
                 count++;
             }
 
@@ -267,7 +309,6 @@ public class TaskList {
             System.out.println("Not found!");
         }
     }
-
 
 
 }

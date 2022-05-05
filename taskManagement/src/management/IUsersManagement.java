@@ -13,7 +13,7 @@ public interface IUsersManagement {
 
     void update(User newUser);
 
-    boolean exist(int id);
+    boolean existById(int id);
 
     boolean checkDuplicateEmail(String email);
 

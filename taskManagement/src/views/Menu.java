@@ -6,6 +6,8 @@ import sort.SortTaskList;
 
 import java.util.Scanner;
 
+import static notification.ReturnToMenu.returnShowTaskMenu;
+
 
 public class Menu {
     static   Scanner input = new Scanner(System.in);
@@ -191,22 +193,19 @@ public static void homeMenu(){
                     case 1:
                         System.out.println("Show all tasks");
                         TaskList.showAllTasks();
-                        System.out.println("Enter any other keys to return: ");
-                        String selection = input.nextLine();
-                        switch (selection){
-                            default:
-                                Menu.showMainMenu();
-                                break;
-                        }
+                        returnShowTaskMenu();
                         break;
                     case 2:
-                        System.out.println("Show pending tasks");;
+                        System.out.println("Show pending tasks: Oops! Update later.");
+                        returnShowTaskMenu();
                         break;
                     case 3:
-                        System.out.println("Show doing tasks");
+                        System.out.println("Show doing tasks: Oops! Update later.");
+                        returnShowTaskMenu();
                         break;
                     case 4:
-                        System.out.println("Show completed tasks");
+                        System.out.println("Show completed tasks: Oops! Update later.");
+                        returnShowTaskMenu();
                         break;
                     case 10:
                         showMainMenu();

@@ -8,11 +8,11 @@ import utils.ValidateUtils;
 import java.util.List;
 import java.util.Scanner;
 
-import static notification.ReturnToMainMenu.returnMainMenu;
+import static notification.ReturnToMenu.returnMainMenu;
 
 
 public class UserView {
-    public static UsersManagement usersManagement = new UsersManagement();
+    public static UsersManagement usersManagement = UsersManagement.getInstance();
     static Scanner input = new Scanner(System.in);
 
     public static void showMembers() {
@@ -35,7 +35,7 @@ public class UserView {
             usersManagement.getUsers();
             System.out.println("Enter id account that you want to change information: ");
             int id = Integer.parseInt(input.nextLine());
-            if (usersManagement.exist(id)) {
+            if (usersManagement.existById(id)) {
                 System.out.println("---------------------------");
                 System.out.println("|  1. Change email        |");
                 System.out.println("|  2. Change phone number |");
@@ -87,7 +87,7 @@ public class UserView {
                     case 3:
                         System.out.println("Enter your current password: ");
                         String curPassword = input.nextLine();
-                        User curUser = findUserById(id);
+                        User curUser = usersManagement.getUserById(id);
                         while(!curPassword.equals(curUser.getPassword())){
                             System.out.println("Wrong password, please try again!");
                             curPassword = input.nextLine();
@@ -120,15 +120,7 @@ public class UserView {
 
 
 
-    public static User findUserById(int id) {
-        List<User> usersList = usersManagement.getUsers();
-        for (User user: usersList) {
-            if(user.getId() == id){
-                return user;
-            }
-        }
-        return null;
-    }
+
 
     public static User findUserByUsername(String username) {
         List<User> usersList = usersManagement.getUsers();

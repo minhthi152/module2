@@ -13,6 +13,16 @@ public class ValidateUtils {
     public static final String EMAIL_REGEX = "^[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\\.[A-Za-z]{2,3}$";
     public static final DateTimeFormatter dateFormatter = DateTimeFormatter.BASIC_ISO_DATE;
 
+    public static final String NUMBER_1_5_REGEX = "^[1-5]\\d*$";
+
+    public static final String NUMBER_REGEX = "\\d+";
+
+    public static boolean isNumberValid(String number) {
+        return Pattern.compile(NUMBER_REGEX).matcher(number).matches();
+    }
+    public static boolean isNumberFrom1To5Valid(String number) {
+        return Pattern.compile(NUMBER_1_5_REGEX).matcher(number).matches();
+    }
 
 
     public static boolean isPasswordValid(String password) {

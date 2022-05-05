@@ -23,7 +23,7 @@ public class SignUp {
             int high = 999;
             do {
                 id = r.nextInt(high-low) + low;
-            } while (userSignUp.exist(id));
+            } while (userSignUp.existById(id));
 
 //            enter full name
             System.out.println("Enter your full name (ex: Thi Pham): ");

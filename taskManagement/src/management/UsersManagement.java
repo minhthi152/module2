@@ -6,13 +6,24 @@ import utils.CSVUtils;
 import java.util.ArrayList;
 import java.util.List;
 
-public class UsersManagement implements IUsersManagement{
-public static String path = "data/users.csv";
+public class UsersManagement implements IUsersManagement {
+    public static UsersManagement instance;
+    public final static String PATH = "data/users.csv";
+
+    private UsersManagement() {
+    }
+
+    public static UsersManagement getInstance() {
+        if (instance == null)
+            instance = new UsersManagement();
+        return instance;
+    }
+
     @Override
     public List<User> getUsers() {
         List<User> userList = new ArrayList<>();
-        List<String> lines = CSVUtils.read(path);
-        for (String line: lines) {
+        List<String> lines = CSVUtils.read(PATH);
+        for (String line : lines) {
             userList.add(new User(line));
         }
         return userList;
@@ -21,8 +32,8 @@ public static String path = "data/users.csv";
     @Override
     public User login(String userName, String password) {
         List<User> usersList = getUsers();
-        for (User user: usersList) {
-            if(user.getUserName().equals(userName) && user.getPassword().equals(password)){
+        for (User user : usersList) {
+            if (user.getUserName().equals(userName) && user.getPassword().equals(password)) {
                 return user;
             }
 
@@ -34,14 +45,14 @@ public static String path = "data/users.csv";
     public void add(User newUser) {
         List<User> usersList = getUsers();
         usersList.add(newUser);
-        CSVUtils.write(path,usersList);
+        CSVUtils.write(PATH, usersList);
     }
 
     @Override
     public void update(User newUser) {
         List<User> usersList = getUsers();
-        for (User user: usersList) {
-            if(user.getId()== newUser.getId()){
+        for (User user : usersList) {
+            if (user.getId() == newUser.getId()) {
                 if (newUser.getFullName() != null && !newUser.getFullName().isEmpty())
                     user.setFullName(newUser.getFullName());
                 if (newUser.getEmail() != null && !newUser.getEmail().isEmpty())
@@ -53,7 +64,7 @@ public static String path = "data/users.csv";
                     user.setUserName(newUser.getUserName());
                 if (newUser.getPassword() != null && !newUser.getPassword().isEmpty())
                     user.setPassword(newUser.getPassword());
-                CSVUtils.write(path, usersList);
+                CSVUtils.write(PATH, usersList);
                 break;
             }
         }
@@ -61,7 +72,7 @@ public static String path = "data/users.csv";
     }
 
     @Override
-    public boolean exist(int id) {
+    public boolean existById(int id) {
         return getUserById(id) != null;
     }
 
@@ -78,8 +89,8 @@ public static String path = "data/users.csv";
     @Override
     public boolean checkDuplicatePhone(String phoneNumber) {
         List<User> usersList = getUsers();
-        for (User user: usersList) {
-            if(user.getPhoneNumber().equals(phoneNumber)){
+        for (User user : usersList) {
+            if (user.getPhoneNumber().equals(phoneNumber)) {
                 return true;
             }
         }
@@ -89,8 +100,8 @@ public static String path = "data/users.csv";
     @Override
     public boolean checkDuplicateUserName(String userName) {
         List<User> usersList = getUsers();
-        for (User user: usersList) {
-            if(user.getUserName().equals(userName)){
+        for (User user : usersList) {
+            if (user.getUserName().equals(userName)) {
                 return true;
             }
         }
@@ -100,8 +111,8 @@ public static String path = "data/users.csv";
     @Override
     public User getUserById(int id) {
         List<User> usersList = getUsers();
-        for (User user: usersList) {
-            if(user.getId() == id){
+        for (User user : usersList) {
+            if (user.getId() == id) {
                 return user;
             }
         }
