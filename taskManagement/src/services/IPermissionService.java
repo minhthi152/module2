@@ -1,17 +1,19 @@
 package services;
 
-import model.Permission;
+import model.Performers;
 
 import java.util.List;
 
 public interface IPermissionService {
-    List<Permission> getPermissions();
+    List<Performers> getPermissions();
 
-    Permission findById(int id);
+    Performers findById(int id);
 
-    List<Permission> findByTaskId(long taskId);
+    List<Performers> findByTaskId(long taskId);
 
-    void add(Permission newPermission);
+    void add(Performers newPermission);
 
-    void update(Permission newPermission);
+    void update(Performers newPermission);
+
+    boolean existById(int id);
 }

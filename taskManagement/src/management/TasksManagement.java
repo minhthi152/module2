@@ -1,6 +1,6 @@
 package management;
 
-import model.Permission;
+import model.Performers;
 import model.Task;
 import services.IPermissionService;
 import services.PermissionService;
@@ -20,7 +20,7 @@ public class TasksManagement implements ITasksManagement {
         List<String> lines = CSVUtils.read(path);
         for (String line : lines) {
             Task task = new Task(line);
-            List<Permission> permissions = permissionService.findByTaskId(task.getId());
+            List<Performers> permissions = permissionService.findByTaskId(task.getId());
             task.setPermissions(permissions);
             curtasksList.add(task);
         }

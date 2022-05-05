@@ -1,5 +1,6 @@
 package model;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class Task {
@@ -9,7 +10,7 @@ public class Task {
     private String deadline;
     private String createdBy;
     private String updatedBy;
-    List<Permission> permissions;
+    List<Performers> permissions;
     private int numberOfPerformer;
     String performers;
     private String lastUpdate;
@@ -29,6 +30,7 @@ public class Task {
         this.lastUpdate = taskFields[8];
         this.status = Status.fromValue(taskFields[9]);
         this.description = taskFields[10];
+        this.permissions = new ArrayList<>();
     }
 
     public Task(String taskName, String createDate, String deadline, User creator, int numberOfPerformer, String performers, String description) {
@@ -43,19 +45,20 @@ public class Task {
         this.lastUpdate = "";
         this.status = Status.PENDING;
         this.description = description;
+        this.permissions = new ArrayList<>();
     }
 
-    public Task(String taskName, String createDate, String deadline,  List<Permission> permissions,Status status, String description) {
+    public Task(String taskName, String createDate, String deadline,User creator, Status status, String description) {
         this.id = System.currentTimeMillis() / 1000;
         this.taskName = taskName;
         this.createDate = createDate;
         this.deadline = deadline;
-    //   this.createdBy = createdBy;
-      //  this.updatedBy = updatedBy;
-        this.permissions = permissions;
+        this.createdBy = creator.getFullName();
+        this.updatedBy = "";
+
       //  this.numberOfPerformer = numberOfPerformer;
       //  this.performers = performers;
-      //  this.lastUpdate = lastUpdate;
+        this.lastUpdate = "";
         this.status = status;
         this.description = description;
     }
@@ -148,11 +151,11 @@ public class Task {
         this.description = description;
     }
 
-    public List<Permission> getPermissions() {
+    public List<Performers> getPermissions() {
         return permissions;
     }
 
-    public void setPermissions(List<Permission> permissions) {
+    public void setPermissions(List<Performers> permissions) {
         this.permissions = permissions;
     }
 

@@ -1,7 +1,7 @@
 package model;
 
 public enum PermissionType {
-    READ, UPDATE, DELETE;
+    READ, UPDATE, CREATE_UPDATE ,CREATE_UPDATE_DELETE;
 
     public static PermissionType parsePermissionType(int value) {
         for (PermissionType permissionType : values()) {
@@ -10,4 +10,5 @@ public enum PermissionType {
         }
         throw new IllegalArgumentException(value + "permission type  invalid");
     }
+
 }

@@ -90,7 +90,7 @@ public class SignUp {
                 String choice = input.nextLine();
                 switch (choice) {
                     case "y":
-                        Menu.showMainMenu();
+                        SignIn.signIn();
                         break;
                     case "n":
                         Menu.homeMenu();

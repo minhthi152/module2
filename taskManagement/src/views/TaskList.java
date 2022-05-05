@@ -1,28 +1,34 @@
 package views;
 
+import management.ITasksManagement;
+import management.IUsersManagement;
 import management.TasksManagement;
 import management.UsersManagement;
 import model.*;
 import notification.WrongChoice;
+import services.IPermissionService;
+import services.PermissionService;
 import utils.ValidateUtils;
 
 import java.text.SimpleDateFormat;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
-import java.util.ArrayList;
 import java.util.List;
+import java.util.Random;
 import java.util.Scanner;
 
 public class TaskList {
-    public static TasksManagement tasksManagement = new TasksManagement();
-    public static UsersManagement usersManagement = UsersManagement.getInstance();
+    public static ITasksManagement tasksManagement = new TasksManagement();
+    public static IUsersManagement usersManagement = UsersManagement.getInstance();
+    public static IPermissionService permissionService = PermissionService.getInstance();
 
     static Scanner input = new Scanner(System.in);
 
     //Add a task to task list
     public static void addTask() {
         tasksManagement.getTasks();
+        permissionService.getPermissions();
 //        System.out.println("Enter an id: ");
 //        int id = Integer.parseInt(input.nextLine());
         System.out.println("1. Enter task name: ");
@@ -70,30 +76,89 @@ public class TaskList {
 //        User creator =  UserView.findUserById(creatorId);
         System.out.println("5. Add a description: ");
         String description = input.nextLine();
-
         // Task task = new Task(taskName.trim(), createdDate.trim(), deadline.trim(), creator, numberOfPerfomers, performers.trim(), description.trim());
-        // Task task = new Task(taskName.trim(), createdDate.trim(), deadline.trim(), permissions, Status.PENDING, description);
-        Task task = null;
+        Task task = new Task(taskName.trim(), createdDate.trim(), deadline.trim(),creator, Status.PENDING, description);
         tasksManagement.addTask(task);
         System.out.println("Successfully added task!");
-        List<Permission> permissions = new ArrayList<>();
-        boolean isRetry = false;
+
+
+        //    permissions = new ArrayList<>();
+        boolean isRetry;
         do {
             UserView.showMembers();
             System.out.println("Enter ID of performer: ");
             int performerID = Integer.parseInt(input.nextLine());
             User performer = usersManagement.getUserById(performerID);
             if (performer == null)
-                System.out.println("Nhap Lai");
+                System.out.println("Wrong ID! please try another ID of performer: ");
             else {
-                //Option Quyen
-                int value = 0;
-                Permission permission = new Permission(performer.getId(), performer.getId(), task.getId(), performer.getFullName(), PermissionType.parsePermissionType(value));
-                permissions.add(permission);
+                int rID;
+                Random r = new Random();
+                int low = 100;
+                int high = 999;
+                do {
+                    rID = r.nextInt(high - low) + low;
+                } while (permissionService.existById(rID));
+                //Option allocate right for performer
+//                 READ, UPDATE, CREATE_UPDATE ,CREATE_UPDATE_DELETE;
+                int value = -1;
+                boolean check = false;
+                System.out.println("Choose the right for performer: ");
+                System.out.println("0. Read only");
+                System.out.println("1. Update");
+                System.out.println("2. Create and update");
+                System.out.println("3. Create, update, delete");
+                do {
+//                    System.out.println("Choose the right for performer: ");
+//                    System.out.println("0. Read only");
+//                    System.out.println("1. Update");
+//                    System.out.println("2. Create and update");
+//                    System.out.println("3. Create, update, delete");
+                    try {
+                        value = Integer.parseInt(input.nextLine());
+//                        switch (value) {
+//                            case 0:
+//                                value = 0;
+//                                break;
+//                            case 1:
+//                                value = 1;
+//                                break;
+//                            case 2:
+//                                value = 2;
+//                                break;
+//                            case 3:
+//                                value = 3;
+//                                break;
+//                            default:
+//                                System.out.println("Please enter a number!");
+//                                check = true;
+//                        }
+                        if (value < -1 || value > 4) {
+                            System.out.println("Please enter a number!");
+                            check = true;
+                        }
+                    } catch (Exception e) {
+                        System.out.println("Please enter a number!");
+                        check = true;
+                    }
+                } while (check);
+
+
+                Performers permission = new Performers(rID, performer.getId(), task.getId(), performer.getFullName(), PermissionType.parsePermissionType(value));
+                //   permissions.add(permission);
+                System.out.println(permission);
+                permissionService.add(permission);
+
             }
-            //Muon them nguoi tiep theo khong?
-//            //isRetry=true;
+            System.out.println("Do you want to add more performer? \n Enter y to add or enter other keys to skip adding.");
+            String choice = input.nextLine();
+            if (choice.equals("y")) {
+                isRetry = true;
+            } else {
+                break;
+            }
         } while (isRetry);
+
         System.out.println("Enter y to continue adding or any other key to return");
         String choice = input.nextLine();
         switch (choice) {
@@ -110,15 +175,20 @@ public class TaskList {
     //    Show task
     public static void showAllTasks() {
         List<Task> tasksList = tasksManagement.getTasks();
+        List<Performers> performers = permissionService.getPermissions();
         System.out.println("---ALL TASKS-------------------------------------------------------------------------------------------------------------------------------------------------------------------------");
-        System.out.printf("%-10s %-20s %-18s %-15s %-15s %-30s %-15s %-20s %-15s %-15s\n", "Id", "Task name", "Create day", "Deadline", "Created by", "Performers", "Updated by", "Last update", "Status", "Description");
+        System.out.printf("%-17s %-23s %-15s %-15s %-15s %-15s %-20s %-15s %-15s\n", "Id", "Task name", "Create day", "Deadline", "Created by", "Updated by", "Last update", "Status", "Description");
         System.out.println("-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------");
 
         for (Task task : tasksList) {
-            System.out.printf("%-10s %-20s %-18s %-15s %-15s %-30s %-15s %-20s %-15s %-15s\n", task.getId(), task.getTaskName(), task.getCreateDate(), task.getDeadline(), task.getCreatedBy(), task.getPerformers(), task.getUpdatedBy(), task.getLastUpdate(), task.isStatus(), task.getDescription());
-        }
-        System.out.println("-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------\n");
+            System.out.printf("%-17s %-23s %-15s %-15s %-15s %-15s %-20s %-15s %-15s\n", task.getId(), task.getTaskName(), task.getCreateDate(), task.getDeadline(), task.getCreatedBy(),task.getUpdatedBy(), task.getLastUpdate(), task.isStatus(), task.getDescription());
+            for(Performers performer : performers){
+                if(performer.getTaskId()==task.getId())
+                System.out.printf("%-17s %-23s\n", performer.getFullName(),performer.getPermissionType());
+            }
+            System.out.print("-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------\n");
 
+        }
 
     }
 

@@ -10,7 +10,7 @@ public class UsersManagement implements IUsersManagement {
     public static UsersManagement instance;
     public final static String PATH = "data/users.csv";
 
-    private UsersManagement() {
+    public UsersManagement() {
     }
 
     public static UsersManagement getInstance() {
