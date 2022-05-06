@@ -18,6 +18,9 @@ import java.util.List;
 import java.util.Random;
 import java.util.Scanner;
 
+import static notification.ReturnToMenu.returnOrContinueUpdateTask;
+import static views.Menu.showMainMenu;
+
 public class TaskList {
     public static ITasksManagement tasksManagement = new TasksManagement();
     public static IUsersManagement usersManagement = UsersManagement.getInstance();
@@ -27,25 +30,36 @@ public class TaskList {
 
     //Add a task to task list
     public static void addTask() {
-        tasksManagement.getTasks();
-        permissionService.getPerformers();
+        User currentUser = UserView.findUserByUsername(SignIn.currentUsername);
+        assert currentUser != null;
+//            System.out.println(fullName);
+//            System.out.println(permissionType);
+//            System.out.println(currentUser.getRole());
+
+        if(!currentUser.getRole().equals(Role.LEADER)){
+            System.out.println("Oops! You do not have the right to add a task :(");
+            System.out.println("This is only for team leader");
+            showMainMenu();
+        }else{
+            tasksManagement.getTasks();
+            permissionService.getPerformers();
 //        System.out.println("Enter an id: ");
 //        int id = Integer.parseInt(input.nextLine());
-        System.out.println("1. Enter task name: ");
-        String taskName = input.nextLine();
-        String createdDate = LocalDate.now().format(DateTimeFormatter.ofPattern("dd-MM-yyyy"));
-        System.out.println("2. Enter a deadline: ");
-        String deadline = input.nextLine();
+            System.out.println("1. Enter task name: ");
+            String taskName = input.nextLine();
+            String createdDate = LocalDate.now().format(DateTimeFormatter.ofPattern("dd-MM-yyyy"));
+            System.out.println("2. Enter a deadline: ");
+            String deadline = input.nextLine();
 
 //        int a = (ValidateUtils.toISODate(deadline)).compareTo(ValidateUtils.toTodayISO(LocalDate.now().toString()));
 //        System.out.println(a);
-        while (!ValidateUtils.isDateValid(deadline) || (ValidateUtils.toISODate(deadline)).compareTo(ValidateUtils.toTodayISO(LocalDate.now().toString())) < 0) {
-            System.out.println("Invalid deadline, please enter a valid deadline:  ");
-            deadline = input.nextLine();
+            while (!ValidateUtils.isDateValid(deadline) || (ValidateUtils.toISODate(deadline)).compareTo(ValidateUtils.toTodayISO(LocalDate.now().toString())) < 0) {
+                System.out.println("Invalid deadline, please enter a valid deadline:  ");
+                deadline = input.nextLine();
 //           System.out.println(a);
-        }
+            }
 
-        User creator = UserView.findUserByUsername(SignIn.currentUsername);
+            User creator = UserView.findUserByUsername(SignIn.currentUsername);
 
 
 //        int numberOfPerfomers = -1;
@@ -74,48 +88,66 @@ public class TaskList {
 //        System.out.println("3. Enter ID of creator: ");
 //        int creatorId = Integer.parseInt(input.nextLine());
 //        User creator =  UserView.findUserById(creatorId);
-        System.out.println("5. Add a description: ");
-        String description = input.nextLine();
-        // Task task = new Task(taskName.trim(), createdDate.trim(), deadline.trim(), creator, numberOfPerfomers, performers.trim(), description.trim());
-        Task task = new Task(taskName.trim(), createdDate.trim(), deadline.trim(),creator, Status.PENDING, description);
-        tasksManagement.addTask(task);
-        System.out.println("Successfully added task!");
+            System.out.println("5. Add a description: ");
+            String description = input.nextLine();
+            // Task task = new Task(taskName.trim(), createdDate.trim(), deadline.trim(), creator, numberOfPerfomers, performers.trim(), description.trim());
+            Task task = new Task(taskName.trim(), createdDate.trim(), deadline.trim(),creator, Status.PENDING, description);
+            tasksManagement.addTask(task);
+            System.out.println("Successfully added task!");
+            System.out.println("Please enter performers: ");
 
+            //    permissions = new ArrayList<>();
+            boolean isRetry;
+            do {
+                UserView.showMembers();
 
-        //    permissions = new ArrayList<>();
-        boolean isRetry;
+                int performerID;
+
         do {
-            UserView.showMembers();
             System.out.println("Enter ID of performer: ");
-            int performerID = Integer.parseInt(input.nextLine());
-            User performer = usersManagement.getUserById(performerID);
-            if (performer == null)
+            String temp = input.nextLine();
+            if (!ValidateUtils.isNumberValid(temp)) {
+                System.out.println("You enter an invalid input, please try again! ");
+                continue;
+            }
+            performerID = Integer.parseInt(temp);
+            if(usersManagement.getUserById(performerID)==null){
                 System.out.println("Wrong ID! please try another ID of performer: ");
-            else {
-                int rID;
-                Random r = new Random();
-                int low = 100;
-                int high = 999;
-                do {
-                    rID = r.nextInt(high - low) + low;
-                } while (permissionService.existById(rID));
-                //Option allocate right for performer
+                continue;
+            }
+
+            if(permissionService.existByIdInEachTask(task.getId(),performerID)){
+                System.out.println("This member is already in this task, please add another different member: ");
+                continue;
+            }
+            break;
+        } while (true);
+
+                User performer = usersManagement.getUserById(performerID);
+
+                    int rID;
+                    Random r = new Random();
+                    int low = 100;
+                    int high = 999;
+                    do {
+                        rID = r.nextInt(high - low) + low;
+                    } while (permissionService.existById(rID));
+                    //Option allocate right for performer
 //                 READ, UPDATE, CREATE_UPDATE ,CREATE_UPDATE_DELETE;
-                int value = -1;
-                boolean check = false;
-                System.out.println("Choose the right for performer: ");
-                System.out.println("0. Read only");
-                System.out.println("1. Update");
-                System.out.println("2. Create and update");
-                System.out.println("3. Create, update, delete");
-                do {
+                    int value = -1;
+                    boolean check = false;
+                    System.out.println("Choose the right for performer: ");
+                    System.out.println("0. Read only");
+                    System.out.println("1. Update");
+                    System.out.println("3. Update and delete");
+                    do {
 //                    System.out.println("Choose the right for performer: ");
 //                    System.out.println("0. Read only");
 //                    System.out.println("1. Update");
 //                    System.out.println("2. Create and update");
 //                    System.out.println("3. Create, update, delete");
-                    try {
-                        value = Integer.parseInt(input.nextLine());
+                        try {
+                            value = Integer.parseInt(input.nextLine());
 //                        switch (value) {
 //                            case 0:
 //                                value = 0;
@@ -133,41 +165,44 @@ public class TaskList {
 //                                System.out.println("Please enter a number!");
 //                                check = true;
 //                        }
-                        if (value < -1 || value > 4) {
+                            if (value < -1 || value > 3) {
+                                System.out.println("Please enter a number!");
+                                check = true;
+                            }
+                        } catch (Exception e) {
                             System.out.println("Please enter a number!");
                             check = true;
                         }
-                    } catch (Exception e) {
-                        System.out.println("Please enter a number!");
-                        check = true;
-                    }
-                } while (check);
+                    } while (check);
 
 
-                Performers permission = new Performers(rID, performer.getId(), task.getId(), performer.getFullName(), PermissionType.parsePermissionType(value));
-                //   permissions.add(permission);
-                System.out.println(permission);
-                permissionService.add(permission);
+                    Performers permission = new Performers(rID, performer.getId(), task.getId(), performer.getFullName(), PermissionType.parsePermissionType(value));
+                    //   permissions.add(permission);
+                    System.out.println(permission);
+                    permissionService.add(permission);
 
-            }
-            System.out.println("Do you want to add more performer? \n Enter y to add or enter other keys to skip adding.");
+
+                System.out.println("Do you want to add more performer? \n Enter y to add or enter other keys to skip adding.");
+                String choice = input.nextLine();
+                if (choice.equals("y")) {
+                    isRetry = true;
+                } else {
+                    break;
+                }
+            } while (isRetry);
+
+            System.out.println("Enter y to continue adding or any other key to return");
             String choice = input.nextLine();
-            if (choice.equals("y")) {
-                isRetry = true;
-            } else {
-                break;
+            switch (choice) {
+                case "y":
+                    addTask();
+                    break;
+                default:
+                    Menu.showMainMenu();
+                    break;
             }
-        } while (isRetry);
 
-        System.out.println("Enter y to continue adding or any other key to return");
-        String choice = input.nextLine();
-        switch (choice) {
-            case "y":
-                addTask();
-                break;
-            default:
-                Menu.showMainMenu();
-                break;
+
         }
 
     }
@@ -258,6 +293,7 @@ public class TaskList {
                         task.setTaskName(newTaskname);
                         tasksManagement.update();
                         System.out.println("Successfully update task name!");
+                        returnOrContinueUpdateTask();
                         break;
                     case 2:
                         System.out.println("Enter new deadline: ");
@@ -273,6 +309,7 @@ public class TaskList {
                         task.setDeadline(deadline);
                         tasksManagement.update();
                         System.out.println("Successfully update deadline!");
+                        returnOrContinueUpdateTask();
                         break;
                     case 3:
                         boolean is = true;
@@ -310,6 +347,7 @@ public class TaskList {
                                 is = false;
                             }
                         } while (!is);
+                        returnOrContinueUpdateTask();
                         break;
                     case 4:
                         System.out.println("Enter description: ");
@@ -317,6 +355,7 @@ public class TaskList {
                         task.setDeadline(description);
                         tasksManagement.update();
                         System.out.println("Successfully update description!");
+//                        returnOrContinueUpdateTask();
                         break;
                     case 5:
                         Menu.showMainMenu();
@@ -370,7 +409,7 @@ public class TaskList {
 
 
             if(currentUser.getRole().equals(Role.LEADER) ||
-                    (performersStr.contains(fullName) && permissionType != null && permissionType.equals(PermissionType.CREATE_UPDATE_DELETE) )){
+                    (performersStr.contains(fullName) && permissionType != null && permissionType.equals(PermissionType.UPDATE_DELETE) )){
                 accept = true;
             }else{
                 System.out.println("Oops! You DO NOT have the right to delete this task :( ");

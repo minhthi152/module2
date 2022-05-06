@@ -58,7 +58,7 @@ public static void homeMenu(){
                 choice = Integer.parseInt(input.nextLine());
                 switch (choice){
                     case 1:
-                        showAddMenu();
+                        TaskList.addTask();
                         break;
                     case 2:
                         showTasks();
@@ -139,42 +139,7 @@ public static void homeMenu(){
 
     }
 
-    public static void showAddMenu(){
-        System.out.println("------------Add task--------");
-        System.out.println("| 1. Add a task            |");
-        System.out.println("| 10. Back to home page    |");
-        System.out.println("----------------------------");
-        System.out.println("Enter your choice: ");
 
-        int choice = -1;
-
-        while (choice != 0){
-
-            try{
-                choice = Integer.parseInt(input.nextLine());;
-                switch (choice){
-                    case 1:
-                        System.out.println("Add a task");
-                        TaskList.addTask();
-                        break;
-                    case 10:
-                        showMainMenu();
-                        break;
-                    default:
-                        WrongChoice.chooseWrong();
-                        showAddMenu();
-                }
-
-            }
-            catch (Exception e){
-                e.printStackTrace();
-                WrongChoice.chooseWrong();
-                showAddMenu();
-            }
-
-        }
-
-    }
     public static void showTasks(){
         System.out.println("----------Show tasks---------");
         System.out.println("| 1. Show all tasks         |");

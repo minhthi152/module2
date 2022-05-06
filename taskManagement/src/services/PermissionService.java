@@ -30,6 +30,7 @@ public class PermissionService implements IPermissionService {
         return performers;
     }
 
+
     @Override
     public Performers findById(int id) {
         List<Performers> performers = getPerformers();
@@ -86,6 +87,16 @@ public class PermissionService implements IPermissionService {
             }
         }
         return null;
+    }
+
+    public boolean existByIdInEachTask(long taskId, int userId){
+        List<Performers> performers = findByTaskId(taskId);
+        for (Performers performer : performers) {
+            if (performer.getUserId()==userId) {
+                return true;
+            }
+        }
+        return false;
     }
 
 

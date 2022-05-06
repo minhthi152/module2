@@ -2,25 +2,8 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="37e0a989-fe90-4d87-95ae-29d80fa36404" name="Changes" comment="">
+      <change afterPath="$PROJECT_DIR$/../stackAndQueue/queuePractice/MyQueue.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../product2" beforeDir="false" afterPath="$PROJECT_DIR$/../product2" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/.gitignore" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/modules.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/vcs.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/BinaryNumber.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/RevertString.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Stack/LinkedList/MyGenericStack.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Stack/LinkedList/StackClient.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/stack/stack/.idea/.gitignore" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/stack/stack/.idea/misc.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/stack/stack/.idea/modules.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/stack/stack/.idea/vcs.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/stack/stack/BinaryNumber.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/stack/stack/RevertString.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/stack/stack/Stack/LinkedList/MyGenericStack.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/stack/stack/Stack/LinkedList/StackClient.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/stack/stack/stack.iml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/stack.iml" beforeDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />

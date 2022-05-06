@@ -1,25 +1,45 @@
+import java.io.*;
 import java.util.Scanner;
 
 public class Main {
     public static void main(String[] args) {
-        Scanner input = new Scanner(System.in);
-        int a,b,c;
-        System.out.print("Enter number a: ");
-        a = input.nextInt();
-        System.out.print("Enter number b: ");
-        b = input.nextInt();
-        System.out.print("Enter number c: ");
-        c = input.nextInt();
+        writeFile();
+        readFile();
+    }
 
-        int i =1;
-        while (true){
-            if((a*i) % b != 0 || (a*i) % c !=0){
-                i++;
-                System.out.println(i);
-                continue;
+    public static void writeFile() {
+        File file = new File("D:\\module2\\Nhap\\file1.csv");
+        try {
+            file.createNewFile();
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+        try {
+            BufferedWriter br = new BufferedWriter(new FileWriter(file));
+            String name = "hello,hi,thi,hang";
+            br.write(name);
+            br.flush();
+            br.close();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+    }
+
+    public static void readFile(){
+        File file = new File("D:\\module2\\Nhap\\file1.csv");
+        try {
+            BufferedReader reader = new BufferedReader(new FileReader(file));
+            String line = "";
+            while ((line = reader.readLine()) != null) {
+                System.out.println(line);
             }
-            System.out.println(a*i + " is LCM of a, b and c");
-            break;
+            reader.close();
+
+        } catch (Exception e) {
+            throw new RuntimeException(e);
         }
     }
+
 }
+

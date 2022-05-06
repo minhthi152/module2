@@ -1,0 +1,121 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ChangeListManager">
+    <list default="true" id="bf74318c-2f54-405a-82cf-1113a5cfcc31" name="Changes" comment="">
+      <change afterPath="$PROJECT_DIR$/product2/bakery-shop-manager/src/vn/ht/bakery/shop/model/Role1.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/product2/bakery-shop-manager/src/vn/ht/bakery/shop/model/Test.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/taskManagement/src/sort/SortTaskList.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/IOtextFile/.idea/IOtextFile.iml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/IOtextFile/FileExample.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/IOtextFile/max/ReadAndWriteFile.java" beforeDir="false" afterPath="$PROJECT_DIR$/IOtextFile/max/ReadAndWriteFile.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/IOtextFile/out/production/IOtextFile/.idea/IOtextFile.iml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/IOtextFile/sum/ReadFileText.java" beforeDir="false" afterPath="$PROJECT_DIR$/IOtextFile/sum/ReadFileText.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Java-collection-framework/ProductsManagemenrt/src/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/Java-collection-framework/ProductsManagemenrt/src/Main.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Java-collection-framework/ProductsManagemenrt/src/model/Product.java" beforeDir="false" afterPath="$PROJECT_DIR$/Java-collection-framework/ProductsManagemenrt/src/model/Product.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Java-collection-framework/ProductsManagemenrt/src/model/ProductManagement.java" beforeDir="false" afterPath="$PROJECT_DIR$/Java-collection-framework/ProductsManagemenrt/src/model/ProductManagement.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Java-collection-framework/ProductsManagemenrt/src/services/ProductServices.java" beforeDir="false" afterPath="$PROJECT_DIR$/Java-collection-framework/ProductsManagemenrt/src/services/ProductServices.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Java-collection-framework/ProductsManagemenrt/src/sortAndSearch/Search.java" beforeDir="false" afterPath="$PROJECT_DIR$/Java-collection-framework/ProductsManagemenrt/src/sortAndSearch/Search.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Java-collection-framework/ProductsManagemenrt/src/sortAndSearch/Sort.java" beforeDir="false" afterPath="$PROJECT_DIR$/Java-collection-framework/ProductsManagemenrt/src/sortAndSearch/Sort.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Java-collection-framework/ProductsManagemenrt/src/views/ProductView.java" beforeDir="false" afterPath="$PROJECT_DIR$/Java-collection-framework/ProductsManagemenrt/src/views/ProductView.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Java-collection-framework/sosanh/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/Java-collection-framework/sosanh/.idea/misc.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/New folder/readAndWriteBinary/BinaryReadExample.java" beforeDir="false" afterPath="$PROJECT_DIR$/New folder/readAndWriteBinary/BinaryReadExample.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Nhap/.idea/.gitignore" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Nhap/Test.java" beforeDir="false" afterPath="$PROJECT_DIR$/Nhap/Test.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Nhap/file1.txt" beforeDir="false" afterPath="$PROJECT_DIR$/Nhap/file1.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Nhap/out/production/Nhap/Array.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Nhap/out/production/Nhap/Main.class" beforeDir="false" afterPath="$PROJECT_DIR$/Nhap/out/production/Nhap/Main.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Nhap/src/Bien.java" beforeDir="false" afterPath="$PROJECT_DIR$/Nhap/src/Bien.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Nhap/src/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/Nhap/src/Main.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Nhap/src/Test.java" beforeDir="false" afterPath="$PROJECT_DIR$/Nhap/src/Test.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/String/stringExample/src/NgayThang.java" beforeDir="false" afterPath="$PROJECT_DIR$/String/stringExample/src/NgayThang.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Threading/threadDemo/DemoThread.java" beforeDir="false" afterPath="$PROJECT_DIR$/Threading/threadDemo/DemoThread.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Threading/threadDemo/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/Threading/threadDemo/Main.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Threading/threadDemo/ThreadExample1.java" beforeDir="false" afterPath="$PROJECT_DIR$/Threading/threadDemo/ThreadExample1.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Threading/threadDemo/ThreadExample2.java" beforeDir="false" afterPath="$PROJECT_DIR$/Threading/threadDemo/ThreadExample2.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/product2" beforeDir="false" afterPath="$PROJECT_DIR$/product2" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/product2/bakery-shop-manager/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/product2/bakery-shop-manager/.idea/misc.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/product2/bakery-shop-manager/.idea/runConfigurations.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/product2/bakery-shop-manager/bakery-shop-manager.iml" beforeDir="false" afterPath="$PROJECT_DIR$/product2/bakery-shop-manager/bakery-shop-manager.iml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/product2/bakery-shop-manager/data/bakerys.csv" beforeDir="false" afterPath="$PROJECT_DIR$/product2/bakery-shop-manager/data/bakerys.csv" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/product2/bakery-shop-manager/data/order.csv" beforeDir="false" afterPath="$PROJECT_DIR$/product2/bakery-shop-manager/data/order.csv" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/product2/bakery-shop-manager/data/orderItem.csv" beforeDir="false" afterPath="$PROJECT_DIR$/product2/bakery-shop-manager/data/orderItem.csv" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/product2/bakery-shop-manager/data/users.csv" beforeDir="false" afterPath="$PROJECT_DIR$/product2/bakery-shop-manager/data/users.csv" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/product2/bakery-shop-manager/out/production/bakery-shop-manager/Main.class" beforeDir="false" afterPath="$PROJECT_DIR$/product2/bakery-shop-manager/out/production/bakery-shop-manager/Main.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/product2/bakery-shop-manager/out/production/bakery-shop-manager/vn/ht/bakery/shop/model/Role.class" beforeDir="false" afterPath="$PROJECT_DIR$/product2/bakery-shop-manager/out/production/bakery-shop-manager/vn/ht/bakery/shop/model/Role.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/product2/bakery-shop-manager/out/production/bakery-shop-manager/vn/ht/bakery/shop/model/User.class" beforeDir="false" afterPath="$PROJECT_DIR$/product2/bakery-shop-manager/out/production/bakery-shop-manager/vn/ht/bakery/shop/model/User.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/product2/bakery-shop-manager/src/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/product2/bakery-shop-manager/src/Main.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/product2/bakery-shop-manager/src/vn/ht/bakery/shop/model/Role.java" beforeDir="false" afterPath="$PROJECT_DIR$/product2/bakery-shop-manager/src/vn/ht/bakery/shop/model/Role.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/product2/bakery-shop-manager/src/vn/ht/bakery/shop/model/User.java" beforeDir="false" afterPath="$PROJECT_DIR$/product2/bakery-shop-manager/src/vn/ht/bakery/shop/model/User.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/product2/bakery-shop-manager/src/vn/ht/bakery/shop/utils/CSVUtils.java" beforeDir="false" afterPath="$PROJECT_DIR$/product2/bakery-shop-manager/src/vn/ht/bakery/shop/utils/CSVUtils.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/product2/bakery-shop-manager/src/vn/ht/bakery/shop/views/Menu.java" beforeDir="false" afterPath="$PROJECT_DIR$/product2/bakery-shop-manager/src/vn/ht/bakery/shop/views/Menu.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/searchAndSort/BinarySearch.java" beforeDir="false" afterPath="$PROJECT_DIR$/searchAndSort/BinarySearch.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/searchAndSort/student/Person.java" beforeDir="false" afterPath="$PROJECT_DIR$/searchAndSort/student/Person.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/stack/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/stack/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/stackAndQueue/Palindrome/Palindrome.java" beforeDir="false" afterPath="$PROJECT_DIR$/stackAndQueue/Palindrome/Palindrome.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/stackAndQueue/queuePractice/MyQueue.java" beforeDir="false" afterPath="$PROJECT_DIR$/stackAndQueue/queuePractice/MyQueue.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/taskManagement/data/tasks.csv" beforeDir="false" afterPath="$PROJECT_DIR$/taskManagement/data/tasks.csv" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/taskManagement/data/users.csv" beforeDir="false" afterPath="$PROJECT_DIR$/taskManagement/data/users.csv" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/taskManagement/out/production/taskManagement/management/ITasksManagement.class" beforeDir="false" afterPath="$PROJECT_DIR$/taskManagement/out/production/taskManagement/management/ITasksManagement.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/taskManagement/out/production/taskManagement/management/TasksManagement.class" beforeDir="false" afterPath="$PROJECT_DIR$/taskManagement/out/production/taskManagement/management/TasksManagement.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/taskManagement/out/production/taskManagement/model/Task.class" beforeDir="false" afterPath="$PROJECT_DIR$/taskManagement/out/production/taskManagement/model/Task.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/taskManagement/out/production/taskManagement/views/Menu.class" beforeDir="false" afterPath="$PROJECT_DIR$/taskManagement/out/production/taskManagement/views/Menu.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/taskManagement/out/production/taskManagement/views/TaskList.class" beforeDir="false" afterPath="$PROJECT_DIR$/taskManagement/out/production/taskManagement/views/TaskList.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/taskManagement/src/management/ITasksManagement.java" beforeDir="false" afterPath="$PROJECT_DIR$/taskManagement/src/management/ITasksManagement.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/taskManagement/src/management/TasksManagement.java" beforeDir="false" afterPath="$PROJECT_DIR$/taskManagement/src/management/TasksManagement.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/taskManagement/src/model/Task.java" beforeDir="false" afterPath="$PROJECT_DIR$/taskManagement/src/model/Task.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/taskManagement/src/views/Menu.java" beforeDir="false" afterPath="$PROJECT_DIR$/taskManagement/src/views/Menu.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/taskManagement/src/views/TaskList.java" beforeDir="false" afterPath="$PROJECT_DIR$/taskManagement/src/views/TaskList.java" afterDir="false" />
+    </list>
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
+  <component name="ProjectId" id="28hXq9anpvXgDdnAs7kjLVBX5iR" />
+  <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "RunOnceActivity.OpenProjectViewOnStart": "true",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "WebServerToolWindowFactoryState": "false",
+    "last_opened_file_path": "D:/module2"
+  }
+}]]></component>
+  <component name="RunManager">
+    <configuration default="true" type="JetRunConfigurationType">
+      <module name="module2" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration default="true" type="KotlinStandaloneScriptRunConfigurationType">
+      <module name="module2" />
+      <option name="filePath" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+  </component>
+  <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="bf74318c-2f54-405a-82cf-1113a5cfcc31" name="Changes" comment="" />
+      <created>1651669980029</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1651669980029</updated>
+      <workItem from="1651669982658" duration="9000" />
+    </task>
+    <servers />
+  </component>
+  <component name="TypeScriptGeneratedFilesManager">
+    <option name="version" value="3" />
+  </component>
+</project>

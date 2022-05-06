@@ -1,10 +1,9 @@
-package sortProduct;
+package sortAndSearch;
 
 import java.util.Collections;
 import java.util.Comparator;
 
 import model.Product;
-import services.ProductServices;
 
 import static services.ProductServices.productList;
 

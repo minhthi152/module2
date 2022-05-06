@@ -1,2 +1,8 @@
-package PACKAGE_NAME;public class ThreadExample1 {
+public class ThreadExample1 implements Runnable{
+    @Override
+    public void run() {
+        for(int i = 0; i<1000; i++){
+            System.out.println("Thread 1: " + i);
+        }
+    }
 }

@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ChangeListManager">
+    <list default="true" id="80dccc5e-7460-4033-8109-5131d3992b48" name="Changes" comment="">
+      <change afterPath="$PROJECT_DIR$/max/ReadAndWriteFile.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/sum/ReadFileText.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../New folder/readAndWriteBinary/BinaryReadExample.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../Nhap/.idea/uiDesigner.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../Nhap/src/FileExample.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Java-collection-framework/ProductsManagemenrt/src/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/../Java-collection-framework/ProductsManagemenrt/src/Main.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Java-collection-framework/ProductsManagemenrt/src/model/Product.java" beforeDir="false" afterPath="$PROJECT_DIR$/../Java-collection-framework/ProductsManagemenrt/src/model/Product.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Java-collection-framework/ProductsManagemenrt/src/model/ProductManagement.java" beforeDir="false" afterPath="$PROJECT_DIR$/../Java-collection-framework/ProductsManagemenrt/src/model/ProductManagement.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Java-collection-framework/ProductsManagemenrt/src/services/ProductServices.java" beforeDir="false" afterPath="$PROJECT_DIR$/../Java-collection-framework/ProductsManagemenrt/src/services/ProductServices.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Java-collection-framework/ProductsManagemenrt/src/sortAndSearch/Search.java" beforeDir="false" afterPath="$PROJECT_DIR$/../Java-collection-framework/ProductsManagemenrt/src/sortAndSearch/Search.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Java-collection-framework/ProductsManagemenrt/src/sortAndSearch/Sort.java" beforeDir="false" afterPath="$PROJECT_DIR$/../Java-collection-framework/ProductsManagemenrt/src/sortAndSearch/Sort.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Java-collection-framework/ProductsManagemenrt/src/views/ProductView.java" beforeDir="false" afterPath="$PROJECT_DIR$/../Java-collection-framework/ProductsManagemenrt/src/views/ProductView.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Java-collection-framework/sosanh/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../Java-collection-framework/sosanh/.idea/misc.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Nhap/.idea/.gitignore" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Nhap/out/production/Nhap/Array.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Nhap/src/Array.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Nhap/src/NgayThang.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../String/stringExample/src/NgayThang.java" beforeDir="false" afterPath="$PROJECT_DIR$/../String/stringExample/src/NgayThang.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../product2" beforeDir="false" afterPath="$PROJECT_DIR$/../product2" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../searchAndSort/BinarySearch.java" beforeDir="false" afterPath="$PROJECT_DIR$/../searchAndSort/BinarySearch.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../searchAndSort/student/Person.java" beforeDir="false" afterPath="$PROJECT_DIR$/../searchAndSort/student/Person.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../stack/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../stack/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../stackAndQueue/Palindrome/Palindrome.java" beforeDir="false" afterPath="$PROJECT_DIR$/../stackAndQueue/Palindrome/Palindrome.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../stackAndQueue/queuePractice/MyQueue.java" beforeDir="false" afterPath="$PROJECT_DIR$/../stackAndQueue/queuePractice/MyQueue.java" afterDir="false" />
+    </list>
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/.." />
+  </component>
+  <component name="MarkdownSettingsMigration">
+    <option name="stateVersion" value="1" />
+  </component>
+  <component name="ProjectId" id="28N0hb7v4iev1F8pfDHdeL21csB" />
+  <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent">
+    <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
+    <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/../taskManagement" />
+    <property name="settings.editor.selected.configurable" value="preferences.lookFeel" />
+  </component>
+  <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="80dccc5e-7460-4033-8109-5131d3992b48" name="Changes" comment="" />
+      <created>1651041861155</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1651041861155</updated>
+    </task>
+    <servers />
+  </component>
+</project>

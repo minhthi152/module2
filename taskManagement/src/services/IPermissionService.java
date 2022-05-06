@@ -20,4 +20,6 @@ public interface IPermissionService {
     boolean existById(int id);
 
     PermissionType findPermissionType(long taskId, String fullName);
+
+    boolean existByIdInEachTask(long taskId, int userId);
 }
