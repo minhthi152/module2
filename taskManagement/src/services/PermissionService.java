@@ -1,6 +1,7 @@
 package services;
 
 import model.Performers;
+import model.PermissionType;
 import utils.CSVUtils;
 
 import java.util.ArrayList;
@@ -20,21 +21,21 @@ public class PermissionService implements IPermissionService {
     }
 
     @Override
-    public List<Performers> getPermissions() {
-        List<Performers> permissions = new ArrayList<>();
+    public List<Performers> getPerformers() {
+        List<Performers> performers = new ArrayList<>();
         List<String> lines = CSVUtils.read(PATH);
         for (String line : lines) {
-            permissions.add(Performers.parsePermission(line));
+            performers.add(Performers.parsePermission(line));
         }
-        return permissions;
+        return performers;
     }
 
     @Override
     public Performers findById(int id) {
-        List<Performers> permissions = getPermissions();
-        for (Performers permission : permissions) {
-            if (permission.getId() == id) {
-                return permission;
+        List<Performers> performers = getPerformers();
+        for (Performers performer : performers) {
+            if (performer.getId() == id) {
+                return performer;
             }
         }
         return null;
@@ -43,10 +44,10 @@ public class PermissionService implements IPermissionService {
     @Override
     public List<Performers> findByTaskId(long taskId) {
         List<Performers> result = new ArrayList<>();
-        List<Performers> permissions = getPermissions();
-        for (Performers permission : permissions) {
-            if (permission.getTaskId() == taskId) {
-                result.add(permission);
+        List<Performers> performers = getPerformers();
+        for (Performers performer : performers) {
+            if (performer.getTaskId() == taskId) {
+                result.add(performer);
             }
         }
         return result;
@@ -54,14 +55,14 @@ public class PermissionService implements IPermissionService {
 
     @Override
     public void add(Performers newPermission) {
-        List<Performers> permissions = getPermissions();
+        List<Performers> permissions = getPerformers();
         permissions.add(newPermission);
         CSVUtils.write(PATH, permissions);
     }
 
     @Override
     public void update(Performers newPermission) {
-        List<Performers> permissions = getPermissions();
+        List<Performers> permissions = getPerformers();
         for (Performers permission : permissions) {
             if (permission.getId() == newPermission.getId()) {
                 permission.setPermissionType(newPermission.getPermissionType());
@@ -74,6 +75,17 @@ public class PermissionService implements IPermissionService {
     @Override
     public boolean existById(int id) {
         return findById(id) != null;
+    }
+
+
+    public PermissionType findPermissionType(long taskId, String fullName){
+        List<Performers> performers = findByTaskId(taskId);
+        for (Performers performer : performers) {
+            if (performer.getFullName().equals(fullName)) {
+               return performer.getPermissionType();
+            }
+        }
+        return null;
     }
 
 

@@ -1,11 +1,13 @@
 package services;
 
 import model.Performers;
+import model.PermissionType;
 
 import java.util.List;
 
 public interface IPermissionService {
-    List<Performers> getPermissions();
+
+    List<Performers> getPerformers();
 
     Performers findById(int id);
 
@@ -16,4 +18,6 @@ public interface IPermissionService {
     void update(Performers newPermission);
 
     boolean existById(int id);
+
+    PermissionType findPermissionType(long taskId, String fullName);
 }

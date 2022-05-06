@@ -1,8 +1,15 @@
 package model;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class Performers {
     private int id;
     private int userId;
+
+//    nguoi dang nhap co nam trong danh sach ko? truyen vao full name, lay ra quyen
+//    UserView.findUserByUsername(SignIn.currentUsername).getFullName()
+
 
     private long taskId;
     private String fullName;
@@ -70,5 +77,7 @@ public class Performers {
     public String toString() {
         return String.format("%d,%d,%d,%s,%d", id, userId, taskId, fullName, permissionType.ordinal());
     }
+
+
 
 }

@@ -28,7 +28,7 @@ public class TaskList {
     //Add a task to task list
     public static void addTask() {
         tasksManagement.getTasks();
-        permissionService.getPermissions();
+        permissionService.getPerformers();
 //        System.out.println("Enter an id: ");
 //        int id = Integer.parseInt(input.nextLine());
         System.out.println("1. Enter task name: ");
@@ -175,7 +175,7 @@ public class TaskList {
     //    Show task
     public static void showAllTasks() {
         List<Task> tasksList = tasksManagement.getTasks();
-        List<Performers> performers = permissionService.getPermissions();
+        List<Performers> performers = permissionService.getPerformers();
         System.out.println("---ALL TASKS-------------------------------------------------------------------------------------------------------------------------------------------------------------------------");
         System.out.printf("%-17s %-23s %-15s %-15s %-15s %-15s %-20s %-15s %-15s\n", "Id", "Task name", "Create day", "Deadline", "Created by", "Updated by", "Last update", "Status", "Description");
         System.out.println("-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------");
@@ -195,25 +195,49 @@ public class TaskList {
     //Edit task
     public static void updateTask() {
         showAllTasks();
+//        if(UserView.findUserByUsername(SignIn.currentUsername).getRole()==Role.LEADER ){
+//
+//        }
         tasksManagement.getTasks();
-
-        long id = -1;
+        boolean accept = false;
+        long taskId = -1;
         do {
-            System.out.println("3. Enter Enter the id of the task you want to delete: ");
+            System.out.println("4. Enter the task ID that you want to update: ");
             String temp = input.nextLine();
             if (!ValidateUtils.isNumberValid(temp) || !tasksManagement.existById(Long.parseLong(temp))) {
-                System.out.println("You enter an invalid input, please try again! ");
+                System.out.println("You enter an invalid ID, please try again! ");
                 continue;
             }
-            id = Long.parseLong(temp);
+            taskId = Long.parseLong(temp);
+            String performersStr = "";
+            for(Performers performer : permissionService.findByTaskId(taskId)){
+                performersStr += performer.getFullName();
+            }
 
-            break;
+            User currentUser = UserView.findUserByUsername(SignIn.currentUsername);
 
-        } while (true);
+            assert currentUser != null;
+            String fullName = currentUser.getFullName();
+            PermissionType permissionType = permissionService.findPermissionType(taskId,fullName);
+
+            System.out.println(fullName);
+            System.out.println(permissionType);
+            System.out.println(currentUser.getRole());
 
 
-        Task task = tasksManagement.getByTaskId(id);
-        if (tasksManagement.checkDuplicateId(id)) {
+            if(currentUser.getRole().equals(Role.LEADER) ||
+                (performersStr.contains(fullName) && permissionType != null && !permissionType.equals(PermissionType.READ) )){
+                System.out.println("Done");
+                accept = true;
+            }
+
+//            break;
+
+        } while (!accept);
+
+
+        Task task = tasksManagement.getByTaskId(taskId);
+        if (tasksManagement.checkDuplicateId(taskId)) {
             System.out.println("------------------------------");
             System.out.println("|  1. Edit task name         |");
             System.out.println("|  2. Update deadline        |");
@@ -379,6 +403,10 @@ public class TaskList {
             System.out.println("Not found!");
         }
     }
+
+
+
+
 
 
 }
