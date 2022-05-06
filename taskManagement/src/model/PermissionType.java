@@ -1,7 +1,7 @@
 package model;
 
 public enum PermissionType {
-    READ, UPDATE, CREATE_UPDATE ,CREATE_UPDATE_DELETE;
+    READ_ONLY, UPDATE, CREATE_UPDATE ,CREATE_UPDATE_DELETE;
 
     public static PermissionType parsePermissionType(int value) {
         for (PermissionType permissionType : values()) {

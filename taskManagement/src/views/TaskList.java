@@ -220,15 +220,18 @@ public class TaskList {
             String fullName = currentUser.getFullName();
             PermissionType permissionType = permissionService.findPermissionType(taskId,fullName);
 
-            System.out.println(fullName);
-            System.out.println(permissionType);
-            System.out.println(currentUser.getRole());
+//            System.out.println(fullName);
+//            System.out.println(permissionType);
+//            System.out.println(currentUser.getRole());
 
 
             if(currentUser.getRole().equals(Role.LEADER) ||
-                (performersStr.contains(fullName) && permissionType != null && !permissionType.equals(PermissionType.READ) )){
-                System.out.println("Done");
+                (performersStr.contains(fullName) && permissionType != null && !permissionType.equals(PermissionType.READ_ONLY) )){
                 accept = true;
+            }else{
+                System.out.println("Oops! You dont have the right to update this task :( ");
+                System.out.println("Please choose another task that you have the right to update.");
+                updateTask();
             }
 
 //            break;
@@ -340,27 +343,68 @@ public class TaskList {
     public static void deleteTask() {
         showAllTasks();
 
-        long id = -1;
+        boolean accept = false;
+        long taskId = -1;
         do {
-            System.out.println("3. Enter Enter the id of the task you want to delete: ");
+            System.out.println("4. Enter the task ID that you want to delete: ");
             String temp = input.nextLine();
-            if (!ValidateUtils.isNumberValid(temp)) {
-                System.out.println("You enter an invalid input, please try again! ");
+            if (!ValidateUtils.isNumberValid(temp) || !tasksManagement.existById(Long.parseLong(temp))) {
+                System.out.println("You enter an invalid ID, please try again! ");
                 continue;
             }
-            id = Long.parseLong(temp);
-            break;
-        } while (true);
+            taskId = Long.parseLong(temp);
+            String performersStr = "";
+            for(Performers performer : permissionService.findByTaskId(taskId)){
+                performersStr += performer.getFullName();
+            }
+
+            User currentUser = UserView.findUserByUsername(SignIn.currentUsername);
+
+            assert currentUser != null;
+            String fullName = currentUser.getFullName();
+            PermissionType permissionType = permissionService.findPermissionType(taskId,fullName);
+
+//            System.out.println(fullName);
+//            System.out.println(permissionType);
+//            System.out.println(currentUser.getRole());
 
 
-        Task task = tasksManagement.getByTaskId(id);
-        if (task == null) {
-            System.out.println("Task with ID " + id + " does not exist!");
-        } else {
+            if(currentUser.getRole().equals(Role.LEADER) ||
+                    (performersStr.contains(fullName) && permissionType != null && permissionType.equals(PermissionType.CREATE_UPDATE_DELETE) )){
+                accept = true;
+            }else{
+                System.out.println("Oops! You DO NOT have the right to delete this task :( ");
+                System.out.println("Please choose another task that you have the right to delete.");
+                deleteTask();
+            }
+
+//            break;
+
+        } while (!accept);
+
+
+//        long id = -1;
+//
+//        do {
+//            System.out.println("3. Enter Enter the id of the task you want to delete: ");
+//            String temp = input.nextLine();
+//            if (!ValidateUtils.isNumberValid(temp)) {
+//                System.out.println("You enter an invalid input, please try again! ");
+//                continue;
+//            }
+//            id = Long.parseLong(temp);
+//            break;
+//        } while (true);
+
+
+        Task task = tasksManagement.getByTaskId(taskId);
+//        if (task == null) {
+//            System.out.println("Task with ID " + taskId + " does not exist!");
+//        } else {
 
             tasksManagement.remove(task);
             System.out.println("Task removed successfully!");
-        }
+
         System.out.println("Enter y to continue deleting or any other key to return");
         String choice = input.nextLine();
         switch (choice) {
@@ -377,28 +421,29 @@ public class TaskList {
     // Search a task
     public static void searchTaskByName() {
         List<Task> tasksList = tasksManagement.getTasks();
-        System.out.println("Enter name of product: ");
+        List<Performers> performers = permissionService.getPerformers();
+        System.out.println("Enter name of the task that you want to search: ");
         String taskName = input.nextLine().toUpperCase();
         SimpleDateFormat df = new SimpleDateFormat("dd-MM-yyyy");
         int count = 0;
 
-
-        for (Task task : tasksList) {
-        }
-        System.out.println("--------------------------------------------------------------------------------------------------------------------------------------------------\n");
-
-
-        System.out.printf("%-10s %-20s %-18s %-15s %-15s %-15s %-20s %-15s %-15s\n", "Id", "Task name", "Create day", "Deadline", "Created by", "Updated by", "Last update", "Status", "Description");
-        System.out.println("--------------------------------------------------------------------------------------------------------------------------------------------------");
+        System.out.println("---ALL TASKS-------------------------------------------------------------------------------------------------------------------------------------------------------------------------");
+        System.out.printf("%-17s %-23s %-15s %-15s %-15s %-15s %-20s %-15s %-15s\n", "Id", "Task name", "Create day", "Deadline", "Created by", "Updated by", "Last update", "Status", "Description");
+        System.out.println("-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------");
         for (int i = 0; i < tasksList.size(); i++) {
 
             if ((tasksList.get(i).getTaskName().toUpperCase()).contains(taskName)) {
-                System.out.printf("%-10s %-20s %-18s %-15s %-15s %-15s %-20s %-15s %-15s\n", tasksList.get(i).getId(), tasksList.get(i).getTaskName(), tasksList.get(i).getCreateDate(), tasksList.get(i).getDeadline(), tasksList.get(i).getCreatedBy(), tasksList.get(i).getUpdatedBy(), tasksList.get(i).getLastUpdate(), tasksList.get(i).isStatus(), tasksList.get(i).getDescription());
+                System.out.printf("%-17s %-23s %-15s %-15s %-15s %-15s %-20s %-15s %-15s\n", tasksList.get(i).getId(), tasksList.get(i).getTaskName(), tasksList.get(i).getCreateDate(), tasksList.get(i).getDeadline(), tasksList.get(i).getCreatedBy(), tasksList.get(i).getUpdatedBy(), tasksList.get(i).getLastUpdate(), tasksList.get(i).isStatus(), tasksList.get(i).getDescription());
                 count++;
+                for(Performers performer : performers){
+                    if(performer.getTaskId()==tasksList.get(i).getId())
+                        System.out.printf("%-17s %-23s\n", performer.getFullName(),performer.getPermissionType());
+                }
+                System.out.println("-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------");
+
             }
 
         }
-        System.out.println("--------------------------------------------------------------------------------------------------------------------------------------------------");
         if (count == 0) {
             System.out.println("Not found!");
         }
