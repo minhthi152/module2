@@ -93,8 +93,8 @@ public class TaskList {
             // Task task = new Task(taskName.trim(), createdDate.trim(), deadline.trim(), creator, numberOfPerfomers, performers.trim(), description.trim());
             Task task = new Task(taskName.trim(), createdDate.trim(), deadline.trim(), creator, Status.PENDING, description);
             tasksManagement.addTask(task);
-            System.out.println("Successfully added task!");
-            System.out.println("Please enter performers: ");
+            System.out.println("----Successfully added task!----");
+            System.out.println("----Please choose the member to be in charge of doing this task: ");
 
             //    permissions = new ArrayList<>();
             boolean isRetry;
@@ -112,12 +112,12 @@ public class TaskList {
                     }
                     performerID = Integer.parseInt(temp);
                     if (usersManagement.getUserById(performerID) == null) {
-                        System.out.println("Wrong ID! please try another ID of performer: ");
+                        System.out.println("Wrong ID! please try another ID of performer :( ");
                         continue;
                     }
 
                     if (permissionService.existByIdInEachTask(task.getId(), performerID)) {
-                        System.out.println("This member is already in this task, please add an another one: ");
+                        System.out.println("This member is already in this task, please add an another one :) ");
                         continue;
                     }
                     break;
@@ -139,7 +139,7 @@ public class TaskList {
                 System.out.println("Choose the right for performer: ");
                 System.out.println("0. Read only");
                 System.out.println("1. Update");
-                System.out.println("3. Update and delete");
+                System.out.println("2. Update and delete");
                 do {
 
                     try {
@@ -161,7 +161,7 @@ public class TaskList {
                 permissionService.add(permission);
 
 
-                System.out.println("Do you want to add more performer? \n Enter y to add or enter other keys to skip adding.");
+                System.out.println("Do you want to add more performer? \n Enter y to continue adding or enter other keys to skip adding performer.");
                 String choice = input.nextLine();
                 if (choice.equals("y")) {
                     isRetry = true;
@@ -170,7 +170,7 @@ public class TaskList {
                 }
             } while (isRetry);
 
-            System.out.println("Enter y to continue adding or any other key to return");
+            System.out.println("Enter y to continue adding task or any other key to return");
             String choice = input.nextLine();
             switch (choice) {
                 case "y":
@@ -190,14 +190,14 @@ public class TaskList {
         List<Task> tasksList = tasksManagement.getTasks();
         List<Performers> performers = permissionService.getPerformers();
         System.out.println("---ALL TASKS-------------------------------------------------------------------------------------------------------------------------------------------------------------------------");
-        System.out.printf("%-17s %-17s %-15s %-15s %-15s %-15s %-30s %-15s %-15s\n", "Id", "Task name", "Create day", "Deadline", "Created by", "Updated by", "Last update", "Status", "Description");
+        System.out.printf("%-17s %-17s %-15s %-15s %-15s %-15s %-50s %-15s %-15s\n", "Id", "Task name", "Create day", "Deadline", "Created by", "Updated by", "Last update", "Status", "Description");
         System.out.println("-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------");
 
         for (Task task : tasksList) {
-            System.out.printf("%-17s %-17s %-15s %-15s %-15s %-15s %-30s %-15s %-15s\n", task.getId(), task.getTaskName(), task.getCreateDate(), task.getDeadline(), task.getCreatedBy(), task.getUpdatedBy(), task.getLastUpdate(), task.isStatus(), task.getDescription());
+            System.out.printf("%-17s %-17s %-15s %-15s %-15s %-15s %-50s %-15s %-15s\n", task.getId(), task.getTaskName(), task.getCreateDate(), task.getDeadline(), task.getCreatedBy(), task.getUpdatedBy(), task.getLastUpdate(), task.isStatus(), task.getDescription());
             for (Performers performer : performers) {
                 if (performer.getTaskId() == task.getId())
-                    System.out.printf("%-17s %-23s\n", performer.getFullName(), performer.getPermissionType());
+                    System.out.printf("%-17s %-23s\n",performer.getUserId() + " " + performer.getFullName(), performer.getPermissionType());
             }
             System.out.print("-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------\n");
 
@@ -209,6 +209,7 @@ public class TaskList {
     public static void updateTask() {
         showAllTasks();
         tasksManagement.getTasks();
+        User currentUser = UserView.findUserByUsername(SignIn.currentUsername);
 
         boolean accept = false;
         long taskId = -1;
@@ -224,8 +225,6 @@ public class TaskList {
             for (Performers performer : permissionService.findByTaskId(taskId)) {
                 performersStr += performer.getFullName();
             }
-
-            User currentUser = UserView.findUserByUsername(SignIn.currentUsername);
 
             assert currentUser != null;
             String fullName = currentUser.getFullName();
@@ -253,14 +252,17 @@ public class TaskList {
         String lastUpdate;
         User updatedBy;
         if (tasksManagement.checkDuplicateId(taskId)) {
-            System.out.println("------------------------------");
-            System.out.println("|  1. Edit task name         |");
-            System.out.println("|  2. Update deadline        |");
-            System.out.println("|  3. Update status          |");
-            System.out.println("|  4. Update description     |");
-            System.out.println("|  5. Return                 |");
-            System.out.println("------------------------------");
-            System.out.println("Enter your choice: ");
+            System.out.println("     ------------------------------");
+            System.out.println("     |  1. Edit task name         |");
+            System.out.println("     |  2. Update deadline        |");
+            System.out.println("     |  3. Update status          |");
+            System.out.println("     |  4. Update description     |");
+            System.out.println("     |  5. Edit right             |");
+            System.out.println("     |  6. Remove performer       |");
+            System.out.println("     |  7. Add performer          |");
+            System.out.println("     |  8. Return                 |");
+            System.out.println("     ------------------------------");
+            System.out.println("     Enter your choice: ");
             try {
                 int choice = Integer.parseInt(input.nextLine());
                 switch (choice) {
@@ -350,16 +352,228 @@ public class TaskList {
                     case 4:
                         System.out.println("Enter description: ");
                         String description = input.nextLine();
-                        task.setDeadline(description);
+                        task.setDescription(description);
                         lastUpdate = LocalDateTime.now().format(DateTimeFormatter.ofPattern("dd-MM-yyyy HH:mm"));
                         task.setLastUpdate(lastUpdate + " description");
                         updatedBy = UserView.findUserByUsername(SignIn.currentUsername);
                         task.setUpdatedBy(updatedBy.getFullName());
                         tasksManagement.update();
                         System.out.println("Successfully update description!");
-//                        returnOrContinueUpdateTask();
+                        returnOrContinueUpdateTask();
                         break;
                     case 5:
+
+                        if (!currentUser.getRole().equals(Role.LEADER)) {
+                            System.out.println("Oops! You do not have the right to edit performer's right :(");
+                            System.out.println("This is only for team leader");
+                            updateTask();
+                        }else{
+                            List<Performers> performers = permissionService.getPerformers();
+                            for (Performers performer : performers) {
+                                if (performer.getTaskId() == taskId)
+                                    System.out.printf("%-17s %-23s\n",performer.getUserId() + " " + performer.getFullName(), performer.getPermissionType());
+                            }
+
+                            System.out.println("Choose ID performer to update their right: ");
+                            int doerID;
+                            do {
+                                System.out.println("Enter ID of performer: ");
+                                String temp = input.nextLine();
+                                if (!ValidateUtils.isNumberValid(temp)) {
+                                    System.out.println("You enter an invalid input, please try again! ");
+                                    continue;
+                                }
+                                doerID = Integer.parseInt(temp);
+                                if (!usersManagement.existById(doerID)) {
+                                    System.out.println("Invalid ID! please try again :( ");
+                                    continue;
+                                }
+
+                                if (!permissionService.existByIdInEachTask(taskId, doerID)) {
+                                    System.out.println("Invalid ID! please try again :(");
+                                    continue;
+                                }
+                                break;
+                            } while (true);
+
+
+                            int idOfPerformerInTask = permissionService.findIDByTaskIdAndPerformerID(taskId,doerID);
+                            Performers performerInCharge = permissionService.findById(idOfPerformerInTask);
+
+
+                            int value = -1;
+                            boolean check = false;
+                            System.out.println("Choose the right to update: ");
+                            System.out.println("0. Read only");
+                            System.out.println("1. Update");
+                            System.out.println("2. Update and delete");
+                            do {
+
+                                try {
+                                    value = Integer.parseInt(input.nextLine());
+
+                                    if (value < -1 || value > 3) {
+                                        System.out.println("Please enter a number!");
+                                        check = true;
+                                    }
+                                } catch (Exception e) {
+                                    System.out.println("Please enter a number!");
+                                    check = true;
+                                }
+                            } while (check);
+
+                            performerInCharge.setPermissionType(PermissionType.parsePermissionType(value));
+                            permissionService.updateForTask(performerInCharge,taskId);
+                            System.out.println("Successfully updated right!");
+
+                            lastUpdate = LocalDateTime.now().format(DateTimeFormatter.ofPattern("dd-MM-yyyy HH:mm"));
+                            task.setLastUpdate(lastUpdate + " right edited for " + performerInCharge.getFullName() );
+                            updatedBy = UserView.findUserByUsername(SignIn.currentUsername);
+                            task.setUpdatedBy(updatedBy.getFullName());
+                            tasksManagement.update();
+                            returnOrContinueUpdateTask();
+                        }
+
+
+                        break;
+                    case 6:
+                        int doerID;
+                        if (!currentUser.getRole().equals(Role.LEADER)) {
+                            System.out.println("Oops! You do not have the right to remove performer :(");
+                            System.out.println("This is only for team leader");
+                            updateTask();
+                        }else{
+                            List <Performers> performers = permissionService.getPerformers();
+                            for (Performers performer : performers) {
+                                if (performer.getTaskId() == taskId)
+                                    System.out.printf("%-17s %-23s\n",performer.getUserId() + " " + performer.getFullName(), performer.getPermissionType());
+                            }
+
+                            System.out.println("Choose ID of performer to remove them out of the task: ");
+
+                            do {
+                                System.out.println("Enter ID of performer: ");
+                                String temp = input.nextLine();
+                                if (!ValidateUtils.isNumberValid(temp)) {
+                                    System.out.println("You enter an invalid input, please try again! ");
+                                    continue;
+                                }
+                                doerID = Integer.parseInt(temp);
+                                if (!usersManagement.existById(doerID)) {
+                                    System.out.println("Invalid ID! please try again :( ");
+                                    continue;
+                                }
+
+                                if (!permissionService.existByIdInEachTask(taskId, doerID)) {
+                                    System.out.println("Invalid ID! please try again :(");
+                                    continue;
+                                }
+                                break;
+                            } while (true);
+
+
+                            int idOfPerformerInTask = permissionService.findIDByTaskIdAndPerformerID(taskId,doerID);
+                            Performers performerInCharge = permissionService.findById(idOfPerformerInTask);
+                            permissionService.removePerformerOutOfTask(performerInCharge,taskId);
+                            System.out.println("Successfully remove " + performerInCharge.getFullName() + " out of the task.");
+
+                            lastUpdate = LocalDateTime.now().format(DateTimeFormatter.ofPattern("dd-MM-yyyy HH:mm"));
+                            task.setLastUpdate(lastUpdate + " remove " + performerInCharge.getFullName());
+                            updatedBy = UserView.findUserByUsername(SignIn.currentUsername);
+                            task.setUpdatedBy(updatedBy.getFullName());
+                            tasksManagement.update();
+                            returnOrContinueUpdateTask();
+                        }
+
+                        break;
+                    case 7:
+                        if (!currentUser.getRole().equals(Role.LEADER)) {
+                            System.out.println("Oops! You do not have the right to add performer :(");
+                            System.out.println("This is only for team leader");
+                            updateTask();
+                        }else{
+                            boolean isRetry;
+                            Performers doer;
+                            do {
+                                UserView.showMembers();
+
+                                int performerID;
+
+                                do {
+                                    System.out.println("Enter ID of performer: ");
+                                    String temp = input.nextLine();
+                                    if (!ValidateUtils.isNumberValid(temp)) {
+                                        System.out.println("You enter an invalid input, please try again! ");
+                                        continue;
+                                    }
+                                    performerID = Integer.parseInt(temp);
+                                    if (usersManagement.getUserById(performerID) == null) {
+                                        System.out.println("Wrong ID! please try another ID of performer :( ");
+                                        continue;
+                                    }
+
+                                    if (permissionService.existByIdInEachTask(task.getId(), performerID)) {
+                                        System.out.println("This member is already in this task, please add an another one :) ");
+                                        continue;
+                                    }
+                                    break;
+                                } while (true);
+
+                                User performer = usersManagement.getUserById(performerID);
+
+                                int rID;
+                                Random r = new Random();
+                                int low = 100;
+                                int high = 999;
+                                do {
+                                    rID = r.nextInt(high - low) + low;
+                                } while (permissionService.existById(rID));
+                                //Option allocate right for performer
+//                 READ, UPDATE, CREATE_UPDATE ,CREATE_UPDATE_DELETE;
+                                int value = -1;
+                                boolean check = false;
+                                System.out.println("Choose the right for performer: ");
+                                System.out.println("0. Read only");
+                                System.out.println("1. Update");
+                                System.out.println("2. Update and delete");
+                                do {
+
+                                    try {
+                                        value = Integer.parseInt(input.nextLine());
+
+                                        if (value < -1 || value > 3) {
+                                            System.out.println("Please enter a number!");
+                                            check = true;
+                                        }
+                                    } catch (Exception e) {
+                                        System.out.println("Please enter a number!");
+                                        check = true;
+                                    }
+                                } while (check);
+
+
+                                doer = new Performers(rID, performer.getId(), taskId, performer.getFullName(), PermissionType.parsePermissionType(value));
+                                System.out.println(doer);
+                                permissionService.add(doer);
+
+
+                                System.out.println("Do you want to add more performer? \n Enter y to continue adding or enter other keys to skip adding performer.");
+                                String select = input.nextLine();
+                                if (select.equals("y")) {
+                                    isRetry = true;
+                                } else {
+                                    break;
+                                }
+                            } while (isRetry);
+                            lastUpdate = LocalDateTime.now().format(DateTimeFormatter.ofPattern("dd-MM-yyyy HH:mm"));
+                            task.setLastUpdate(lastUpdate + " added " + doer.getFullName());
+                            updatedBy = UserView.findUserByUsername(SignIn.currentUsername);
+                            task.setUpdatedBy(updatedBy.getFullName());
+                            tasksManagement.update();
+                            returnOrContinueUpdateTask();
+                        }
+                        break;
+                    case 8:
                         Menu.showMainMenu();
                         break;
                     default:
@@ -369,9 +583,6 @@ public class TaskList {
             } catch (Exception e) {
                 WrongChoice.chooseWrong();
                 updateTask();
-            } finally {
-
-                tasksManagement.update();
             }
         }
 
@@ -384,8 +595,11 @@ public class TaskList {
         boolean accept = false;
         long taskId = -1;
         do {
-            System.out.println("4. Enter the task ID that you want to delete: ");
+            System.out.println("4. Enter the task ID that you want to delete or enter n to return: ");
             String temp = input.nextLine();
+            if(temp.equals("n")){
+                showMainMenu();
+            }
             if (!ValidateUtils.isNumberValid(temp) || !tasksManagement.existById(Long.parseLong(temp))) {
                 System.out.println("You enter an invalid ID, please try again! ");
                 continue;

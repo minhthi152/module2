@@ -1,7 +1,6 @@
 package model;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.util.Objects;
 
 public class Performers {
     private int id;
@@ -78,6 +77,16 @@ public class Performers {
         return String.format("%d,%d,%d,%s,%d", id, userId, taskId, fullName, permissionType.ordinal());
     }
 
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Performers that = (Performers) o;
+        return id == that.id && userId == that.userId && taskId == that.taskId && Objects.equals(fullName, that.fullName) && permissionType == that.permissionType;
+    }
 
-
+    @Override
+    public int hashCode() {
+        return Objects.hash(id, userId, taskId, fullName, permissionType);
+    }
 }

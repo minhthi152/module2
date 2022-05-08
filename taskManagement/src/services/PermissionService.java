@@ -61,16 +61,26 @@ public class PermissionService implements IPermissionService {
         CSVUtils.write(PATH, permissions);
     }
 
+
     @Override
-    public void update(Performers newPermission) {
-        List<Performers> permissions = getPerformers();
-        for (Performers permission : permissions) {
-            if (permission.getId() == newPermission.getId()) {
-                permission.setPermissionType(newPermission.getPermissionType());
+    public void updateForTask(Performers newPermission, long taskId) {
+        List<Performers> performersOfTask = findByTaskId(taskId);
+        for (Performers performer : performersOfTask) {
+            if (performer.getId() == newPermission.getId()) {
+                performer.setPermissionType(newPermission.getPermissionType());
                 break;
             }
         }
-        CSVUtils.write(PATH, permissions);
+        CSVUtils.write(PATH, performersOfTask);
+    }
+
+
+    @Override
+    public void removePerformerOutOfTask(Performers performer,long taskId ) {
+        System.out.println(performer);
+        List<Performers> performers = getPerformers();
+        performers.remove(performer);
+        CSVUtils.write(PATH, performers);
     }
 
     @Override
@@ -89,14 +99,34 @@ public class PermissionService implements IPermissionService {
         return null;
     }
 
-    public boolean existByIdInEachTask(long taskId, int userId){
-        List<Performers> performers = findByTaskId(taskId);
-        for (Performers performer : performers) {
-            if (performer.getUserId()==userId) {
+    public boolean existByIdInEachTask(long taskId, int performerID){
+
+        List<Performers> performersOfTask = findByTaskId(taskId);
+        for (Performers performer : performersOfTask) {
+            if (performer.getUserId()==performerID) {
                 return true;
             }
         }
         return false;
+    }
+
+    public int findIDByTaskIdAndPerformerID(long taskId, int performerID){
+        List<Performers> performers = findByTaskId(taskId);
+        for (Performers performer : performers) {
+            if (performer.getUserId()==performerID) {
+                return performer.getId();
+            }
+        }
+        return -1;
+    }
+
+    @Override
+    public void addPerformerToTask(Performers performer, long taskId) {
+        System.out.println(performer);
+        List<Performers> performersOfTask = findByTaskId(taskId);
+        performersOfTask.add(performer);
+        List<Performers> performers = getPerformers();
+        CSVUtils.write(PATH, performers);
     }
 
 

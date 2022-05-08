@@ -16,7 +16,10 @@ public class Notice {
     public static void showNotice(){
 
 
+
         List<Task> tasksList = tasksManagement.getTasks();
+
+
         int count = 0;
         System.out.println("---HURRY UP!-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------");
         System.out.printf("%-10s %-20s %-18s %-15s %-15s %-30s %-15s %-20s %-15s %-15s\n", "Id", "Task name", "Create day", "Deadline", "Created by", "Performers","Updated by", "Last update", "Status", "Description");

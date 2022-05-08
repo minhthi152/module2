@@ -15,11 +15,19 @@ public interface IPermissionService {
 
     void add(Performers newPermission);
 
-    void update(Performers newPermission);
+
+    void updateForTask(Performers newPermission, long taskId);
+
+    void removePerformerOutOfTask(Performers performer, long taskId);
 
     boolean existById(int id);
 
     PermissionType findPermissionType(long taskId, String fullName);
 
     boolean existByIdInEachTask(long taskId, int userId);
+
+    int findIDByTaskIdAndPerformerID(long taskId, int performerID);
+
+
+    void addPerformerToTask(Performers performer,long taskId);
 }
